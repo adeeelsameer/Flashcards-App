@@ -1,7 +1,17 @@
+'use client'
+
+import { useState, useEffect } from 'react';
+import { useUser } from '@clerk/nextjs';
+import {db} from '@/firebase'
+import {Container,CardActionArea,TextField,Button,Typography,Dialog,DialogTitle,DialogContent,DialogContentText,DialogActions,Grid,Card,CardContent,AppBar,Toolbar,
+  Box,
+  CircularProgress,
+} from '@mui/material'
+import { collection, getDoc, addDoc, deleteDoc, updateDoc, doc, writeBatch, setDoc } from "firebase/firestore";
+
 export default function Flashcard() {
-    const { isLoaded, isSignedIn, user } = useUser()
+    const { user } = useUser();
     const [flashcards, setFlashcards] = useState([])
-    const router = useRouter()
 
     useEffect(() => {
         async function getFlashcards() {

@@ -1,6 +1,7 @@
 'use client'
 
 import { useState } from 'react'
+import {db} from '@/firebase'
 import {
   Container,
   TextField,
@@ -22,10 +23,16 @@ import {
 import {
   SignedIn,
   SignedOut,
-  UserButton
+  UserButton,
+  useUser
 } from '@clerk/nextjs'
+import { collection, getDoc, addDoc, deleteDoc, updateDoc, doc, writeBatch } from "firebase/firestore";
+
+
 
 export default function Generate() {
+  const { user } = useUser();
+  console.log(`user: ${JSON.stringify(user)}`)
   const [text, setText] = useState('')
   const [flashcards, setFlashcards] = useState([])
   const [setName, setSetName] = useState('')
@@ -66,38 +73,46 @@ export default function Generate() {
 
   const saveFlashcards = async () => {
     if (!setName.trim()) {
-      alert('Please enter a name for your flashcard set.')
-      return
+      alert('Please enter a name for your flashcard set.');
+      return;
     }
-
+  
     try {
-      const userDocRef = doc(collection(db, 'users'), user.id)
-      const userDocSnap = await getDoc(userDocRef)
-
-      const batch = writeBatch(db)
-
-      if (userDocSnap.exists()) {
-        const userData = userDocSnap.data()
-        const updatedSets = [...(userData.flashcardSets || []), { name: setName }]
-        batch.update(userDocRef, { flashcardSets: updatedSets })
+      
+      const batch = writeBatch(db);
+      const userDocRef = doc(collection(db, 'users'), user.id);
+      const docSnap = await getDoc(userDocRef);
+  
+      // Check if the user document exists
+      if (docSnap.exists()) {
+        const collections = docSnap.data().flashcards || [];
+        if( collections.find((f)=>f.name=== setName)){
+          alert("Flashcard collection with same name exists.");
+          return
+        }else{
+          collections.push({name:setName})
+          batch.set(userDocRef,{flashcards: collections},{merge: true})
+        }
       } else {
-        batch.set(userDocRef, { flashcardSets: [{ name: setName }] })
+        batch.set(userDocRef, { flashcards: [{ name: setName }] });
       }
-
-      const setDocRef = doc(collection(userDocRef, 'flashcardSets'), setName)
-      batch.set(setDocRef, { flashcards })
-
-      await batch.commit()
-
-      alert('Flashcards saved successfully!')
-      handleCloseDialog()
-      setSetName('')
+      
+      const colRef= collection(userDocRef,setName)
+      flashcards.forEach((flashcard)=>{
+        const cardDocRef= doc(colRef)
+        batch.set(cardDocRef,flashcard)
+      })
+      
+      await batch.commit();
+      alert('Flashcards saved successfully!');
+      handleCloseDialog();
+      setSetName('');
+      window.location.href = '/flashcards';
     } catch (error) {
-      console.error('Error saving flashcards:', error)
-      alert('An error occurred while saving flashcards. Please try again.')
+      console.error('Error saving flashcards:', error);
+      alert('An error occurred while saving flashcards. Please try again.');
     }
   }
-
   return (
     <Container maxWidth="100vw">
       <AppBar position="static">
