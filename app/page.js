@@ -10,6 +10,7 @@ import {
   UserButton
 } from '@clerk/nextjs'
 import { styled } from '@mui/material/styles'; // Changed import here
+import ResponsiveAppBar from "./components/Navbar";
 
 // Styled components for the plan cards
 const PlanCard = styled(Card)(({ theme }) => ({
@@ -35,58 +36,62 @@ export default function Home() {
       headers: { origin: 'http://localhost:3000' },
     })
     const checkoutSessionJson = await checkoutSession.json()
-  
+
     const stripe = await getStripe()
-    const {error} = await stripe.redirectToCheckout({
+    const { error } = await stripe.redirectToCheckout({
       sessionId: checkoutSessionJson.id,
     })
-  
+
     if (error) {
       console.warn(error.message)
     }
   }
 
   return (
-    <>
-      <AppBar position="static">
-        <Toolbar>
-          <Typography variant="h6" style={{flexGrow: 1}}>
-            Flashcard
-          </Typography>
-          <SignedOut>
-            <Button color="inherit" href="/sign-in">Login</Button>
-            <Button color="inherit" href="/sign-up">Sign Up</Button>
-          </SignedOut>
-          <SignedIn>
-            <UserButton />
-          </SignedIn>
-        </Toolbar>
-      </AppBar>
-      <Box sx={{textAlign: 'center', my: 4}}>
-        <Typography variant="h2" component="h1" gutterBottom>
-          Welcome to Flashcard SaaS
-        </Typography>
-        <Typography variant="h5" component="h2" gutterBottom>
-          The easiest way to create flashcards from your text.
-        </Typography>
+    <Box bgcolor={"black"} width="100%" height="100%" color="white">
+      <ResponsiveAppBar></ResponsiveAppBar>
+      <Box display={"flex"} flexDirection="column" justifyContent={"center"} alignItems={"center"} sx={{
+        textAlign: 'center', my: 4, pt: {
+          xs: '56px', md: '64px'
+        }, height: {
+          xs: 'calc(100vh - 56px)',
+          md: 'calc(100vh - 64px)',
+        },
 
-        <Button variant="contained" color="primary" sx={{mt: 2, mr: 2}} href="/generate">
-          Get Started
-        </Button>
+      }} >
+        <Typography variant="h2" component="h1" gutterBottom m="5px" sx={{
+          color: '#fff',
+          textShadow: '0 0 10px #29586c, 0 0 20px #29586c, 0 0 30px #29586c, 0 0 40px #87dafb, 0 0 70px #87dafb, 0 0 80px #87dafb, 0 0 100px #87dafb',
+          fontFamily: 'Arial, sans-serif',
+        }}>
+          <b>Welcome to FLASHIFY</b>
+        </Typography>
+        <Typography variant="h5" component="h2" gutterBottom sx={{
+          color: '#fff',
+          textShadow: '0 0 10px #29586c, 0 0 20px #29586c, 0 0 30px #29586c, 0 0 40px #87dafb, 0 0 70px #87dafb, 0 0 80px #87dafb, 0 0 100px #87dafb',
+          fontFamily: 'Arial, sans-serif'
+        }}>
+          The easiest way to create flashcards using your text.
+        </Typography>
+        <Box m="30px">
+          <Button variant="contained" color="primary" sx={{ mt: 2, mr: 2 }} href="/generate">
+            Get Started
+          </Button>
 
-        <Button variant="outlined" color="primary" sx={{mt: 2}}  href="/learn-more">
-          Learn More
-        </Button>
+          <Button variant="outlined" color="primary" sx={{ mt: 2 }} href="/learn-more">
+            Learn More
+          </Button>
+        </Box>
       </Box>
 
-      <Box sx={{my: 6}}>
+      <Box sx={{ my: 6 }}>
         <Typography variant="h4" component="h2" gutterBottom>Features</Typography>
         <Grid container spacing={4}>
           {/* Feature items */}
         </Grid>
       </Box>
 
-      <Box sx={{my: 6, textAlign: 'center'}}>
+      <Box sx={{ my: 6, textAlign: 'center' }}>
         <Typography variant="h4" component="h2" gutterBottom>Pricing</Typography>
         <PlanContainer container spacing={4} justifyContent="center">
           <Grid item xs={12} md={4}>
@@ -165,6 +170,6 @@ export default function Home() {
           </Grid>
         </PlanContainer>
       </Box>
-    </>
+    </Box >
   );
 }
