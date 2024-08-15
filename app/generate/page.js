@@ -1,9 +1,8 @@
 'use client'
 
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { db } from '@/firebase'
 import {
-  Container,
   TextField,
   Button,
   Typography,
@@ -19,7 +18,6 @@ import {
   Toolbar,
   Box,
   CircularProgress,
-  CardActionArea,
 } from '@mui/material'
 import {
   SignedIn,
@@ -27,9 +25,7 @@ import {
   UserButton,
   useUser
 } from '@clerk/nextjs'
-import { collection, getDoc, addDoc, deleteDoc, updateDoc, doc, writeBatch, setDoc } from "firebase/firestore";
-
-
+import { collection, getDoc, getDocs, doc, setDoc } from "firebase/firestore";
 
 export default function Generate() {
   const { user } = useUser();
@@ -73,13 +69,6 @@ export default function Generate() {
     }
   }
 
-  const handleCardClick = (id) => {
-    setFlipped((prev) => ({
-      ...prev,
-      [id]: !prev[id]
-    }))
-  }
-
   const saveFlashcards = async () => {
     if (!setName.trim()) {
       alert('Please enter a name for your flashcard set.');
@@ -104,7 +93,6 @@ export default function Generate() {
 
       // Save the flashcards directly under the setName document
       await setDoc(setDocRef, { flashcards });
-
 
       alert('Flashcards saved successfully!');
       handleCloseDialog();
@@ -132,7 +120,20 @@ export default function Generate() {
           </SignedIn>
         </Toolbar>
       </AppBar>
+
       <Box sx={{ my: 4 }}>
+        {flashcardSets.length > 0 && (
+          <Box sx={{ mb: 4, display: 'flex', justifyContent: 'center' }}>
+            <Button
+              variant="contained"
+              color="primary"
+              onClick={() => window.location.href = '/flashcards'}
+            >
+              View Saved Flashcard Sets
+            </Button>
+          </Box>
+        )}
+
         <Typography variant="h4" component="h1" gutterBottom>
           Generate Flashcards
         </Typography>
@@ -184,7 +185,7 @@ export default function Generate() {
           <Typography variant="h5" component="h2" gutterBottom>
             Generated Flashcards
           </Typography>
-          <Grid container spacing={3}>
+          <Grid container spacing={2}>
             {flashcards.map((flashcard, index) => (
               <Grid item xs={12} sm={6} md={4} key={index}>
                 <Card>
@@ -248,17 +249,16 @@ export default function Generate() {
             ))}
           </Grid>
         </Box>
-      )
-      }
-      {
-        flashcards.length > 0 && (
-          <Box sx={{ mt: 4, display: 'flex', justifyContent: 'center' }}>
-            <Button variant="contained" color="primary" onClick={handleOpenDialog}>
-              Save Flashcards
-            </Button>
-          </Box>
-        )
-      }
+      )}
+
+      {flashcards.length > 0 && (
+        <Box sx={{ mt: 4, display: 'flex', justifyContent: 'center' }}>
+          <Button variant="contained" color="primary" onClick={handleOpenDialog}>
+            Save Flashcards
+          </Button>
+        </Box>
+      )}
+
       <Dialog open={dialogOpen} onClose={handleCloseDialog}>
         <DialogTitle>Save Flashcard Set</DialogTitle>
         <DialogContent>
@@ -282,6 +282,6 @@ export default function Generate() {
           </Button>
         </DialogActions>
       </Dialog>
-    </Box >
+    </Box>
   )
 }
