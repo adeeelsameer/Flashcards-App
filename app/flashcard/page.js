@@ -1,10 +1,22 @@
+'use client'
+import { useState, useEffect } from 'react';
+import { useUser } from '@clerk/nextjs';
+import { useSearchParams } from 'next/navigation';
+import {db} from '@/firebase'
+import {Container,CardActionArea,TextField,Button,Typography,Dialog,DialogTitle,DialogContent,DialogContentText,DialogActions,Grid,Card,CardContent,AppBar,Toolbar,
+  Box,
+  CircularProgress,
+} from '@mui/material'
+import { collection, getDoc, addDoc, deleteDoc, updateDoc, doc, writeBatch, setDoc, getDocs } from "firebase/firestore";
+
 export default function Flashcard() {
     const { isLoaded, isSignedIn, user } = useUser()
     const [flashcards, setFlashcards] = useState([])
     const [flipped, setFlipped] = useState({})
   
+   
     const searchParams = useSearchParams()
-    const search = searchParams.get('id')
+    const search = searchParams.get('id');
 
 
     useEffect(() => {
