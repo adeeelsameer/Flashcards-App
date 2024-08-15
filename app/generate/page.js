@@ -27,7 +27,7 @@ import {
   UserButton,
   useUser
 } from '@clerk/nextjs'
-import { collection, getDoc, addDoc, deleteDoc, updateDoc, doc, writeBatch ,setDoc} from "firebase/firestore";
+import { collection, getDoc, addDoc, deleteDoc, updateDoc, doc, writeBatch, setDoc } from "firebase/firestore";
 
 
 
@@ -40,7 +40,6 @@ export default function Generate() {
   const [dialogOpen, setDialogOpen] = useState(false)
   const [loading, setLoading] = useState(false)
   const [flipped, setFlipped] = useState([])
-  const [isFlipped, setIsFlipped] = useState(false)
 
   const handleOpenDialog = () => setDialogOpen(true)
   const handleCloseDialog = () => setDialogOpen(false)
@@ -86,26 +85,26 @@ export default function Generate() {
       alert('Please enter a name for your flashcard set.');
       return;
     }
-  
+
     if (flashcards.length === 0) {
       alert('There are no flashcards to save.');
       return;
     }
-  
+
     try {
       const userDocRef = doc(db, 'users', user.id);
       const setDocRef = doc(userDocRef, 'flashcardSets', setName);
-  
+
       // Check if the flashcard set already exists
       const setDocSnap = await getDoc(setDocRef);
       if (setDocSnap.exists()) {
         alert("A flashcard set with this name already exists.");
         return;
       }
-  
+
       // Save the flashcards directly under the setName document
       await setDoc(setDocRef, { flashcards });
-  
+
 
       alert('Flashcards saved successfully!');
       handleCloseDialog();
@@ -116,7 +115,7 @@ export default function Generate() {
       alert('An error occurred while saving flashcards. Please try again.');
     }
   };
-  
+
   return (
     <Box width="100%" height="100%">
       <AppBar position="static">
@@ -194,19 +193,19 @@ export default function Generate() {
                       <Box sx={{
                         perspective: '1000px',
                         '& > div': {
-                          transition:
-                            'transform 0.6s',
-                          transformStyle: 'preserve-3d', position: 'relative', width:
-                            '100%', height: '200px', boxShadow:
-                            '0 4px 8px 0 rgba(0,0,0, 0.2)',
-                          transform:
-                            flipped[index] ?
-                              'rotateY(180deg)' :
-                              'rotateY(0deg)',
+                          bgcolor: "blue",
+                          transition: 'transform 0.6s',
+                          transformStyle: 'preserve-3d',
+                          position: 'relative',
+                          width: '100%',
+                          height: '500px',
+                          boxShadow: '0 4px 8px 0 rgba(0,0,0, 0.2)',
+                          transform: flipped[index] ? 'rotateY(180deg)' : 'rotateY(0deg)',
                         },
                         '& > div>div': {
-                          position: 'absolute', width:
-                            '100%', height: '200px',
+                          position: 'absolute',
+                          width: '100%',
+                          height: '100%',
                           backfaceVisibility: 'hidden',
                           display: 'flex',
                           justifyContent: 'center',
@@ -216,21 +215,35 @@ export default function Generate() {
                         },
                         '& > div>div:nth-of-type(2)': {
                           transform: 'rotateY(180deg)'
-
                         },
                       }}>
                         <div>
                           <div>
-                            <Typography>{flashcard.front}</Typography>
+                            <Typography sx={{
+                              fontSize: "30px",
+                              textAlign: "center",
+                              wordBreak: "break-word",
+                              overflowWrap: "break-word",
+                              p: "50px"
+                            }}>
+                              {flashcard.front}
+                            </Typography>
                           </div>
                           <div>
-                            <Typography>{flashcard.back}</Typography>
+                            <Typography sx={{
+                              fontSize: "30px",
+                              textAlign: "center",
+                              wordBreak: "break-word",
+                              overflowWrap: "break-word",
+                              p: "50px"
+                            }}>{flashcard.back}</Typography>
                           </div>
                         </div>
                       </Box>
                     </CardContent>
                   </CardActionArea>
                 </Card>
+
               </Grid>
             ))}
           </Grid>
