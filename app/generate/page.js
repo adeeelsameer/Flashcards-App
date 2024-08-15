@@ -141,8 +141,30 @@ export default function Generate() {
           multiline
           rows={4}
           variant="outlined"
-          sx={{ mb: 2, bgcolor: "white" }}
+          sx={{
+            mb: 2,
+            bgcolor: "white", // Background color of the entire TextField
+            "& .MuiOutlinedInput-root": {
+              bgcolor: "black", // Background color of the input area
+              "& fieldset": {
+                borderColor: "white", // Border color
+              },
+              "&:hover fieldset": {
+                borderColor: "white", // Border color on hover
+              },
+              "&.Mui-focused fieldset": {
+                borderColor: "white", // Border color when focused
+              },
+            },
+            "& .MuiInputBase-input": {
+              color: "white", // Text color inside the input
+            },
+            "& .MuiInputLabel-root": {
+              color: "white", // Label color
+            },
+          }}
         />
+
         <Button
           variant="contained"
           color="primary"
