@@ -44,6 +44,9 @@ export default function Flashcard() {
       }));
       
       setFlashcardSets(sets);
+      if (sets.length === 0) {
+        window.location.href='/generate'
+      }
     }
 
     getFlashcardSets();
@@ -100,8 +103,12 @@ export default function Flashcard() {
       const setDocRef = doc(userDocRef, 'flashcardSets', currentSet.id);
 
       await deleteDoc(setDocRef);
+      const updatedFlashcardSets = flashcardSets.filter(set => set.id !== currentSet.id);
       setFlashcardSets(flashcardSets.filter(set => set.id !== currentSet.id));
       setDeleteDialogOpen(false);
+      if (updatedFlashcardSets.length === 0) {
+        window.location.href='/generate'; 
+      }
     } catch (error) {
       console.error('Error deleting document: ', error);
       alert('Failed to delete the flashcard set.');

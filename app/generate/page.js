@@ -1,9 +1,8 @@
 'use client'
 
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { db } from '@/firebase'
 import {
-  Container,
   TextField,
   Button,
   Typography,
@@ -26,9 +25,7 @@ import {
   UserButton,
   useUser
 } from '@clerk/nextjs'
-import { collection, getDoc, addDoc, deleteDoc, updateDoc, doc, writeBatch ,setDoc} from "firebase/firestore";
-
-
+import { collection, getDoc, getDocs, doc, setDoc } from "firebase/firestore";
 
 export default function Generate() {
   const { user } = useUser();
@@ -38,6 +35,31 @@ export default function Generate() {
   const [setName, setSetName] = useState('')
   const [dialogOpen, setDialogOpen] = useState(false)
   const [loading, setLoading] = useState(false)
+  const [flashcardSets, setFlashcardSets] = useState([]);  // State to hold existing flashcard sets
+
+  // Fetch flashcard sets when the component mounts
+  useEffect(() => {
+    const fetchFlashcardSets = async () => {
+      if (!user) return;
+
+      try {
+        const userDocRef = doc(db, 'users', user.id);
+        const flashcardSetsCollection = collection(userDocRef, 'flashcardSets');
+        const querySnapshot = await getDocs(flashcardSetsCollection);
+
+        const sets = querySnapshot.docs.map(doc => doc.id);
+        setFlashcardSets(sets);
+      } catch (error) {
+        console.error('Error fetching flashcard sets:', error);
+      }
+    };
+
+    fetchFlashcardSets();
+  }, [user]);
+  
+  const handleSetClick = (setName) => {
+    window.location.href = `/flashcards/${setName}`;
+  };
 
   const handleOpenDialog = () => setDialogOpen(true)
   const handleCloseDialog = () => setDialogOpen(false)
@@ -96,7 +118,6 @@ export default function Generate() {
       // Save the flashcards directly under the setName document
       await setDoc(setDocRef, { flashcards });
   
-
       alert('Flashcards saved successfully!');
       handleCloseDialog();
       setSetName('');
@@ -123,7 +144,21 @@ export default function Generate() {
           </SignedIn>
         </Toolbar>
       </AppBar>
+
       <Box sx={{ my: 4 }}>
+      {flashcardSets.length > 0 && (
+  <Box sx={{ mb: 4, display: 'flex', justifyContent: 'center' }}>
+    <Button
+      variant="contained"
+      color="primary"
+      onClick={() => window.location.href = '/flashcards'}
+    >
+      View Saved Flashcard Sets
+    </Button>
+  </Box>
+)}
+
+
         <Typography variant="h4" component="h1" gutterBottom>
           Generate Flashcards
         </Typography>
@@ -191,6 +226,7 @@ export default function Generate() {
           </Grid>
         </Box>
       )}
+
       {flashcards.length > 0 && (
         <Box sx={{ mt: 4, display: 'flex', justifyContent: 'center' }}>
           <Button variant="contained" color="primary" onClick={handleOpenDialog}>
@@ -198,6 +234,7 @@ export default function Generate() {
           </Button>
         </Box>
       )}
+
       <Dialog open={dialogOpen} onClose={handleCloseDialog}>
         <DialogTitle>Save Flashcard Set</DialogTitle>
         <DialogContent>
