@@ -1,7 +1,7 @@
 'use client'
 
 import { useState } from 'react'
-import {db} from '@/firebase'
+import { db } from '@/firebase'
 import {
   Container,
   TextField,
@@ -96,6 +96,7 @@ export default function Generate() {
       // Save the flashcards directly under the setName document
       await setDoc(setDocRef, { flashcards });
   
+
       alert('Flashcards saved successfully!');
       handleCloseDialog();
       setSetName('');
@@ -107,11 +108,11 @@ export default function Generate() {
   };
   
   return (
-    <Container maxWidth="100vw" >
+    <Box width="100%" height="100%">
       <AppBar position="static">
         <Toolbar>
           <Typography variant="h6" style={{ flexGrow: 1 }}>
-            Flashcard SaaS
+            FLASHIFY
           </Typography>
           <SignedOut>
             <Button color="inherit" href="/sign-in">Login</Button>
@@ -134,8 +135,30 @@ export default function Generate() {
           multiline
           rows={4}
           variant="outlined"
-          sx={{ mb: 2 }}
+          sx={{
+            mb: 2,
+            bgcolor: "white", // Background color of the entire TextField
+            "& .MuiOutlinedInput-root": {
+              bgcolor: "black", // Background color of the input area
+              "& fieldset": {
+                borderColor: "white", // Border color
+              },
+              "&:hover fieldset": {
+                borderColor: "white", // Border color on hover
+              },
+              "&.Mui-focused fieldset": {
+                borderColor: "white", // Border color when focused
+              },
+            },
+            "& .MuiInputBase-input": {
+              color: "white", // Text color inside the input
+            },
+            "& .MuiInputLabel-root": {
+              color: "white", // Label color
+            },
+          }}
         />
+
         <Button
           variant="contained"
           color="primary"
@@ -198,6 +221,6 @@ export default function Generate() {
           </Button>
         </DialogActions>
       </Dialog>
-    </Container>
+    </Box>
   )
 }

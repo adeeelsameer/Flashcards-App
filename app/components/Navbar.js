@@ -12,8 +12,7 @@ import {
     UserButton
 } from '@clerk/nextjs'
 
-const pages = ['Products', 'Pricing', 'Learn More'];
-const settings = ['Profile', 'Account', 'Dashboard', 'Logout'];
+const pages = ['Products', 'Pricing', 'FAQ'];
 
 function ResponsiveAppBar() {
     const [anchorElNav, setAnchorElNav] = React.useState(null);
