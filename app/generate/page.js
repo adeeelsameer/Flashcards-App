@@ -18,6 +18,7 @@ import {
   Toolbar,
   Box,
   CircularProgress,
+  CardActionArea,
 } from '@mui/material'
 import {
   SignedIn,
@@ -35,7 +36,9 @@ export default function Generate() {
   const [setName, setSetName] = useState('')
   const [dialogOpen, setDialogOpen] = useState(false)
   const [loading, setLoading] = useState(false)
-  const [flashcardSets, setFlashcardSets] = useState([]);  // State to hold existing flashcard sets
+  const [flashcardSets, setFlashcardSets] = useState([]);  
+  const [flipped, setFlipped] = useState([])
+  const [isFlipped, setIsFlipped] = useState(false)
 
   // Fetch flashcard sets when the component mounts
   useEffect(() => {
@@ -89,9 +92,17 @@ export default function Generate() {
       console.error('Error generating flashcards:', error)
       alert('An error occurred while generating flashcards. Please try again.')
     } finally {
-      setLoading(false) // Set loading state to false
+      setLoading(false) 
     }
   }
+
+  const handleCardClick = (id) => {
+    setFlipped((prev) => ({
+      ...prev,
+      [id]: !prev[id]
+    }))
+  }
+
 
   const saveFlashcards = async () => {
     if (!setName.trim()) {
@@ -156,8 +167,7 @@ export default function Generate() {
       View Saved Flashcard Sets
     </Button>
   </Box>
-)}
-
+   )}
         <Typography variant="h4" component="h1" gutterBottom>
           Generate Flashcards
         </Typography>
@@ -209,16 +219,51 @@ export default function Generate() {
           <Typography variant="h5" component="h2" gutterBottom>
             Generated Flashcards
           </Typography>
-          <Grid container spacing={2}>
+          <Grid container spacing={3}>
             {flashcards.map((flashcard, index) => (
               <Grid item xs={12} sm={6} md={4} key={index}>
                 <Card>
-                  <CardContent>
-                    <Typography variant="h6">Front:</Typography>
-                    <Typography>{flashcard.front}</Typography>
-                    <Typography variant="h6" sx={{ mt: 2 }}>Back:</Typography>
-                    <Typography>{flashcard.back}</Typography>
-                  </CardContent>
+                <CardActionArea onClick={() => { handleCardClick(index) }}>
+                    <CardContent>
+                      <Box sx={{
+                        perspective: '1000px',
+                        '& > div': {
+                          transition:
+                            'transform 0.6s',
+                          transformStyle: 'preserve-3d', position: 'relative', width:
+                            '100%', height: '200px', boxShadow:
+                            '0 4px 8px 0 rgba(0,0,0, 0.2)',
+                          transform:
+                            flipped[index] ?
+                              'rotateY(180deg)' :
+                              'rotateY(0deg)',
+                        },
+                        '& > div>div': {
+                          position: 'absolute', width:
+                            '100%', height: '200px',
+                          backfaceVisibility: 'hidden',
+                          display: 'flex',
+                          justifyContent: 'center',
+                          alignItems: 'center',
+                          padding: '2',
+                          boxSizing: 'border-box',
+                        },
+                        '& > div>div:nth-of-type(2)': {
+                          transform: 'rotateY(180deg)'
+
+                        },
+                      }}>
+                        <div>
+                          <div>
+                            <Typography>{flashcard.front}</Typography>
+                          </div>
+                          <div>
+                            <Typography>{flashcard.back}</Typography>
+                          </div>
+                        </div>
+                      </Box>
+                    </CardContent>
+                  </CardActionArea>
                 </Card>
               </Grid>
             ))}
