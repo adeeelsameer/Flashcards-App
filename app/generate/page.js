@@ -1,7 +1,7 @@
 'use client'
 
 import { useState } from 'react'
-import {db} from '@/firebase'
+import { db } from '@/firebase'
 import {
   Container,
   TextField,
@@ -76,33 +76,33 @@ export default function Generate() {
       alert('Please enter a name for your flashcard set.');
       return;
     }
-  
+
     try {
-      
+
       const batch = writeBatch(db);
       const userDocRef = doc(collection(db, 'users'), user.id);
       const docSnap = await getDoc(userDocRef);
-  
+
       // Check if the user document exists
       if (docSnap.exists()) {
         const collections = docSnap.data().flashcards || [];
-        if( collections.find((f)=>f.name=== setName)){
+        if (collections.find((f) => f.name === setName)) {
           alert("Flashcard collection with same name exists.");
           return
-        }else{
-          collections.push({name:setName})
-          batch.set(userDocRef,{flashcards: collections},{merge: true})
+        } else {
+          collections.push({ name: setName })
+          batch.set(userDocRef, { flashcards: collections }, { merge: true })
         }
       } else {
         batch.set(userDocRef, { flashcards: [{ name: setName }] });
       }
-      
-      const colRef= collection(userDocRef,setName)
-      flashcards.forEach((flashcard)=>{
-        const cardDocRef= doc(colRef)
-        batch.set(cardDocRef,flashcard)
+
+      const colRef = collection(userDocRef, setName)
+      flashcards.forEach((flashcard) => {
+        const cardDocRef = doc(colRef)
+        batch.set(cardDocRef, flashcard)
       })
-      
+
       await batch.commit();
       alert('Flashcards saved successfully!');
       handleCloseDialog();
@@ -114,11 +114,11 @@ export default function Generate() {
     }
   }
   return (
-    <Container maxWidth="100vw">
+    <Box width="100%" height="100%">
       <AppBar position="static">
         <Toolbar>
           <Typography variant="h6" style={{ flexGrow: 1 }}>
-            Flashcard SaaS
+            FLASHIFY
           </Typography>
           <SignedOut>
             <Button color="inherit" href="/sign-in">Login</Button>
@@ -141,7 +141,7 @@ export default function Generate() {
           multiline
           rows={4}
           variant="outlined"
-          sx={{ mb: 2 }}
+          sx={{ mb: 2, bgcolor: "white" }}
         />
         <Button
           variant="contained"
@@ -205,6 +205,6 @@ export default function Generate() {
           </Button>
         </DialogActions>
       </Dialog>
-    </Container>
+    </Box>
   )
 }
