@@ -95,7 +95,7 @@ export default function Home() {
                 <Typography variant="h5" component="div" gutterBottom>
                   Bronze Plan
                 </Typography>
-                <Typography variant="h6">$5/month</Typography>
+                <Typography variant="h6">FREE</Typography>
                 <Typography variant="body1" gutterBottom>
                   Access to 50 flashcards
                 </Typography>
@@ -118,7 +118,7 @@ export default function Home() {
                 <Typography variant="h5" component="div" gutterBottom>
                   Silver Plan
                 </Typography>
-                <Typography variant="h6">$10/month</Typography>
+                <Typography variant="h6">$5/month</Typography>
                 <Typography variant="body1" gutterBottom>
                   Access to 100 flashcards
                 </Typography>
