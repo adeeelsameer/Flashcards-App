@@ -1,76 +1,123 @@
 'use client'
+
 import { useState, useEffect } from 'react';
 import { useUser } from '@clerk/nextjs';
 import { useSearchParams } from 'next/navigation';
-import {db} from '@/firebase'
-import {Container,CardActionArea,TextField,Button,Typography,Dialog,DialogTitle,DialogContent,DialogContentText,DialogActions,Grid,Card,CardContent,AppBar,Toolbar,
+import { db } from '@/firebase';
+import {
+  Container,
+  CardActionArea,
+  Typography,
+  Grid,
+  Card,
+  CardContent,
+  AppBar,
+  Toolbar,
   Box,
-  CircularProgress,
-} from '@mui/material'
-import { collection, getDoc, addDoc, deleteDoc, updateDoc, doc, writeBatch, setDoc, getDocs } from "firebase/firestore";
+} from '@mui/material';
+import { collection, getDocs, doc, getDoc } from 'firebase/firestore';
 
 export default function Flashcard() {
-    const { isLoaded, isSignedIn, user } = useUser()
-    const [flashcards, setFlashcards] = useState([])
-    const [flipped, setFlipped] = useState({})
-  
-   
-    const searchParams = useSearchParams()
-    const search = searchParams.get('id');
+  const { user } = useUser();
+  const [flashcards, setFlashcards] = useState([]);
+  const [selectedSet, setSelectedSet] = useState(null);
 
+  const searchParams = useSearchParams();
+  const search = searchParams.get('id');
 
-    useEffect(() => {
-        async function getFlashcard() {
-          if (!search || !user) return
+  useEffect(() => {
+    async function getFlashcardSetById(setId) {
+      if (!setId || !user) return;
       
-          const colRef = collection(doc(collection(db, 'users'), user.id), search)
-          const docs = await getDocs(colRef)
-          const flashcards = []
-          docs.forEach((doc) => {
-            flashcards.push({ id: doc.id, ...doc.data() })
-          })
-          setFlashcards(flashcards)
-        }
-        getFlashcard()
-      }, [search, user])
+      const userDocRef = doc(db, 'users', user.id);
+      const setDocRef = doc(userDocRef, 'flashcardSets', setId);
+      const setDocSnap = await getDoc(setDocRef);
+      
+      if (setDocSnap.exists()) {
+        setFlashcards(setDocSnap.data().flashcards || []);
+        setSelectedSet({ id: setId, name: setDocSnap.data().name || setId });
+      }
+    }
 
-      const handleCardClick = (id) => {
-        setFlipped((prev) => ({
-          ...prev,
-          [id]: !prev[id],
-        }))
+    if (search) {
+      getFlashcardSetById(search);
+    } else {
+      async function getFlashcardSets() {
+        if (!user) return;
+        const userDocRef = doc(db, 'users', user.id);
+        const flashcardSetsRef = collection(userDocRef, 'flashcardSets');
+        const querySnapshot = await getDocs(flashcardSetsRef);
+
+        const sets = querySnapshot.docs.map(doc => ({
+          id: doc.id,
+          name: doc.data().name || doc.id,
+        }));
+
+        setFlashcards(sets);
+        setSelectedSet(null);
       }
 
-      return (
-        <Container maxWidth="md">
-          <Grid container spacing={3} sx={{ mt: 4 }}>
-            {flashcards.map((flashcard) => (
-              <Grid item xs={12} sm={6} md={4} key={flashcard.id}>
-                <Card>
-                  <CardActionArea onClick={() => handleCardClick(flashcard.id)}>
-                    <CardContent>
-                      <Box sx={{ /* Styling for flip animation */ }}>
-                        <div>
-                          <div>
-                            <Typography variant="h5" component="div">
-                              {flashcard.front}
-                            </Typography>
-                          </div>
-                          <div>
-                            <Typography variant="h5" component="div">
-                              {flashcard.back}
-                            </Typography>
-                          </div>
-                        </div>
-                      </Box>
-                    </CardContent>
-                  </CardActionArea>
-                </Card>
-              </Grid>
-            ))}
+      getFlashcardSets();
+    }
+  }, [search, user]);
+
+  return (
+    <Container maxWidth="md">
+      <AppBar position="static">
+        <Toolbar>
+          <Typography variant="h6" style={{ flexGrow: 1 }}>
+            Flashcard Sets
+          </Typography>
+        </Toolbar>
+      </AppBar>
+
+      {selectedSet ? (
+        <Box sx={{ mt: 4 }}>
+          <Typography variant="h4" gutterBottom>
+            {selectedSet.name}
+          </Typography>
+          <Grid container spacing={3}>
+            {flashcards.length > 0 ? (
+              flashcards.map((flashcard, index) => (
+                <Grid item xs={12} sm={6} md={4} key={index}>
+                  <Card>
+                    <CardActionArea>
+                      <CardContent>
+                        <Typography variant="h5" component="div">
+                          {flashcard.front}
+                        </Typography>
+                        <Typography variant="body1" component="div">
+                          {flashcard.back}
+                        </Typography>
+                      </CardContent>
+                    </CardActionArea>
+                  </Card>
+                </Grid>
+              ))
+            ) : (
+              <Typography variant="h6" color="textSecondary" sx={{ mt: 4 }}>
+                No flashcards found.
+              </Typography>
+            )}
           </Grid>
-        </Container>
-      )
-  
-    
-  }
+        </Box>
+      ) : (
+        <Grid container spacing={3} sx={{ mt: 4 }}>
+          {flashcards.map((set) => (
+            <Grid item xs={12} sm={6} md={4} key={set.id}>
+              <Card>
+                <CardActionArea onClick={() => window.location.href = `?id=${set.id}`}>
+                  <CardContent>
+                    <Typography variant="h5" component="div">
+                      {set.name}
+                    </Typography>
+                  </CardContent>
+                </CardActionArea>
+              </Card>
+            </Grid>
+          ))}
+        </Grid>
+      )}
+    </Container>
+  );
+}
