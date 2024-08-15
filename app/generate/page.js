@@ -26,7 +26,7 @@ import {
   UserButton,
   useUser
 } from '@clerk/nextjs'
-import { collection, getDoc, addDoc, deleteDoc, updateDoc, doc, writeBatch } from "firebase/firestore";
+import { collection, getDoc, addDoc, deleteDoc, updateDoc, doc, writeBatch ,setDoc} from "firebase/firestore";
 
 
 
@@ -77,33 +77,25 @@ export default function Generate() {
       return;
     }
   
-    try {
-      
-      const batch = writeBatch(db);
-      const userDocRef = doc(collection(db, 'users'), user.id);
-      const docSnap = await getDoc(userDocRef);
+    if (flashcards.length === 0) {
+      alert('There are no flashcards to save.');
+      return;
+    }
   
-      // Check if the user document exists
-      if (docSnap.exists()) {
-        const collections = docSnap.data().flashcards || [];
-        if( collections.find((f)=>f.name=== setName)){
-          alert("Flashcard collection with same name exists.");
-          return
-        }else{
-          collections.push({name:setName})
-          batch.set(userDocRef,{flashcards: collections},{merge: true})
-        }
-      } else {
-        batch.set(userDocRef, { flashcards: [{ name: setName }] });
+    try {
+      const userDocRef = doc(db, 'users', user.id);
+      const setDocRef = doc(userDocRef, 'flashcardSets', setName);
+  
+      // Check if the flashcard set already exists
+      const setDocSnap = await getDoc(setDocRef);
+      if (setDocSnap.exists()) {
+        alert("A flashcard set with this name already exists.");
+        return;
       }
-      
-      const colRef= collection(userDocRef,setName)
-      flashcards.forEach((flashcard)=>{
-        const cardDocRef= doc(colRef)
-        batch.set(cardDocRef,flashcard)
-      })
-      
-      await batch.commit();
+  
+      // Save the flashcards directly under the setName document
+      await setDoc(setDocRef, { flashcards });
+  
       alert('Flashcards saved successfully!');
       handleCloseDialog();
       setSetName('');
@@ -112,9 +104,10 @@ export default function Generate() {
       console.error('Error saving flashcards:', error);
       alert('An error occurred while saving flashcards. Please try again.');
     }
-  }
+  };
+  
   return (
-    <Container maxWidth="100vw">
+    <Container maxWidth="100vw" >
       <AppBar position="static">
         <Toolbar>
           <Typography variant="h6" style={{ flexGrow: 1 }}>
