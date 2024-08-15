@@ -158,7 +158,6 @@ export default function Generate() {
   </Box>
 )}
 
-
         <Typography variant="h4" component="h1" gutterBottom>
           Generate Flashcards
         </Typography>
