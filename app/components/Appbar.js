@@ -1,40 +1,26 @@
+'use client'
 import * as React from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
-import { Box, Typography, AppBar, Toolbar, Button, Grid, Card, CardContent, IconButton, Menu, Container, Avatar, Tooltip, MenuItem, TextField } from '@mui/material'
+import { Box, Typography, AppBar, Toolbar, Button, IconButton, Menu, Container, MenuItem } from '@mui/material';
 import MenuIcon from '@mui/icons-material/Menu';
-import AdbIcon from '@mui/icons-material/Adb';
-import {
-    ClerkProvider,
-    SignInButton,
-    SignedIn,
-    SignedOut,
-    UserButton
-} from '@clerk/nextjs'
+import { SignedIn, SignedOut, UserButton } from '@clerk/nextjs';
 
-const pages = [{ name: 'Home', path: '/' }, { name: 'FAQ', path: '/faq' }]
+const pages = [{ name: 'Home', path: '/' }, { name: 'FAQ', path: '/faq' }, { name: 'Saved Flashcards', path: '/flashcards' }];
 
 function ResponsiveAppBar() {
     const [anchorElNav, setAnchorElNav] = React.useState(null);
-    const [anchorElUser, setAnchorElUser] = React.useState(null);
 
     const handleOpenNavMenu = (event) => {
         setAnchorElNav(event.currentTarget);
-    };
-    const handleOpenUserMenu = (event) => {
-        setAnchorElUser(event.currentTarget);
     };
 
     const handleCloseNavMenu = () => {
         setAnchorElNav(null);
     };
 
-    const handleCloseUserMenu = () => {
-        setAnchorElUser(null);
-    };
-
     return (
-        <AppBar position="fixed" sx={{ bgcolor: "black", color: "white" }}>
+        <AppBar position="fixed" sx={{ bgcolor: "#1f1f1f", color: "#f0f0f0" }}>
             <Container maxWidth="xl">
                 <Toolbar disableGutters>
                     <Box m="3px" sx={{ display: { xs: 'none', md: 'flex' } }}>
@@ -44,8 +30,8 @@ function ResponsiveAppBar() {
                                 alt="Logo"
                                 width={75} // Set your desired width
                                 height={75} // Set your desired height
-
-                            /></Link>
+                            />
+                        </Link>
                     </Box>
                     <Box sx={{ flexGrow: 1, display: { xs: 'flex', md: 'none' } }}>
                         <IconButton
@@ -78,7 +64,7 @@ function ResponsiveAppBar() {
                         >
                             {pages.map((page) => (
                                 <MenuItem key={page.name} onClick={handleCloseNavMenu}>
-                                    <Typography textAlign="center">{page.name}</Typography>
+                                    <Typography sx={{ textAlign: "center", color: "#f0f0f0" }}>{page.name}</Typography>
                                 </MenuItem>
                             ))}
                         </Menu>
@@ -88,36 +74,34 @@ function ResponsiveAppBar() {
                             <Button
                                 key={page.name}
                                 onClick={handleCloseNavMenu}
-                                sx={{ textAlign: 'center', my: 1, mx: 3, color: 'white', display: 'block', ":hover": { bgcolor: 'orangered', color: 'white' } }}
+                                sx={{
+                                    my: 1,
+                                    mx: 3,
+                                    color: '#f0f0f0',
+                                    display: 'block',
+                                    textAlign: "center",
+                                    ":hover": { bgcolor: '#3700b3', color: 'white' }
+                                }}
                                 href={page.path}
                             >
                                 {page.name}
                             </Button>
                         ))}
                     </Box>
-                    <Box sx={{ flexGrow: 0 }}>
+                    <Box sx={{ flexGrow: 0, display: 'flex', alignItems: 'center' }}>
                         <SignedOut>
-                            <Box display={'flex'} sx={{ my: 1, mx: 3 }}>
-                                <Box>
-                                    <Button sx={{ mx: 1, color: 'white', display: 'block', ":hover": { bgcolor: 'white', color: 'black' } }} href="/sign-up">Sign Up</Button>
-                                </Box>
-                                <Box>
-                                    <Button sx={{ mx: 1, color: 'orangered', ":hover": { bgcolor: 'orangered', color: 'white' } }} href="/sign-in"><b>Login</b></Button>
-                                </Box>
+                            <Box display={'flex'}>
+                                <Button sx={{ mx: 1, color: '#f0f0f0', ":hover": { bgcolor: '#bb86fc', color: 'black' } }} href="/sign-up">Sign Up</Button>
+                                <Button sx={{ mx: 1, color: '#bb86fc', ":hover": { bgcolor: '#3700b3', color: 'white' } }} href="/sign-in"><b>Login</b></Button>
                             </Box>
                         </SignedOut>
                         <SignedIn>
                             <UserButton />
                         </SignedIn>
-
                     </Box>
                 </Toolbar>
-            </Container >
-        </AppBar >
+            </Container>
+        </AppBar>
     );
 }
 export default ResponsiveAppBar;
-
-
-
-

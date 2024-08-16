@@ -1,39 +1,13 @@
 'use client'
 import Image from "next/image";
-import styles from "./page.module.css";
-import { Container, Box, Typography, AppBar, Toolbar, Button, Grid, Card, CardContent } from '@mui/material'
-import {
-  ClerkProvider,
-  SignInButton,
-  SignedIn,
-  SignedOut,
-  UserButton
-} from '@clerk/nextjs'
-import ResponsiveNavBar from "./components/Navbar";
-
-
+import { Container, Box, Typography, Button, Grid } from '@mui/material'
+import { styled } from '@mui/material/styles';
+import ResponsiveAppBar from "./components/Navbar";
 export default function Home() {
 
-  const handleSubmit = async () => {
-    const checkoutSession = await fetch('/api/checkout_sessions', {
-      method: 'POST',
-      headers: { origin: 'http://localhost:3000' },
-    })
-    const checkoutSessionJson = await checkoutSession.json()
-
-    const stripe = await getStripe()
-    const { error } = await stripe.redirectToCheckout({
-      sessionId: checkoutSessionJson.id,
-    })
-
-    if (error) {
-      console.warn(error.message)
-    }
-  }
-
   return (
-    <Box bgcolor={"black"} width="100%" height="100%" color="white">
-      <ResponsiveNavBar></ResponsiveNavBar>
+    <Box width="100%" height="100%" sx={{ backgroundImage: 'linear-gradient(to right, #121212, #2c2c2c)', color: 'white' }}>
+      <ResponsiveAppBar />
       <Box display={"flex"} flexDirection="column" justifyContent={"center"} alignItems={"center"} sx={{
         textAlign: 'center', my: 4, pt: {
           xs: '56px', md: '64px'
@@ -41,42 +15,38 @@ export default function Home() {
           xs: 'calc(100vh - 56px)',
           md: 'calc(100vh - 64px)',
         },
-
-      }} >
-        <Typography variant="h2" component="h1" gutterBottom m="5px" sx={{
-          color: '#fff',
-          textShadow: '0 0 10px #29586c, 0 0 20px #29586c, 0 0 30px #29586c, 0 0 40px #87dafb, 0 0 70px #87dafb, 0 0 80px #87dafb, 0 0 100px #87dafb',
+      }}>
+        <Typography variant="h2" component="h1" gutterBottom sx={{
+          color: '#bb86fc',
+          textShadow: '0 0 10px #3700b3, 0 0 20px #3700b3, 0 0 30px #3700b3, 0 0 40px #bb86fc',
           fontFamily: 'Arial, sans-serif',
         }}>
           <b>Welcome to FLASHIFY</b>
         </Typography>
         <Typography variant="h5" component="h2" gutterBottom sx={{
-          color: '#fff',
-          textShadow: '0 0 10px #29586c, 0 0 20px #29586c, 0 0 30px #29586c, 0 0 40px #87dafb, 0 0 70px #87dafb, 0 0 80px #87dafb, 0 0 100px #87dafb',
+          color: '#f0f0f0',
+          textShadow: '0 0 10px #3700b3, 0 0 20px #3700b3, 0 0 30px #3700b3, 0 0 40px #bb86fc',
           fontFamily: 'Arial, sans-serif'
         }}>
           The easiest way to create flashcards using your text.
         </Typography>
         <Box m="30px">
-          <Button variant="contained" color="primary" sx={{ bgcolor: 'white', color: 'black', mt: 2, mr: 2, ":hover": { bgcolor: 'orangered', color: 'white' } }} href="/generate">
+          <Button variant="contained" sx={{
+            backgroundColor: '#bb86fc',
+            color: 'white',
+            mt: 2,
+            mr: 2,
+            "&:hover": { backgroundColor: '#3700b3', color: 'white' },
+          }} href="/generate">
             Get Started
           </Button>
 
-          <Button
-            variant="outlined"
-            color="primary"
-            sx={{
-              mt: 2,
-              borderColor: 'white',
-              color: 'white',
-              ":hover": {
-                borderColor: 'orangered',
-                bgcolor: 'transparent',
-                color: "orangered"
-              }
-            }}
-            href="/learn-more"
-          >
+          <Button variant="outlined" sx={{
+            borderColor: '#bb86fc',
+            color: '#bb86fc',
+            mt: 2,
+            "&:hover": { backgroundColor: '#3700b3', color: 'white', borderColor: '#3700b3' },
+          }} href="/learn-more">
             Learn More
           </Button>
         </Box>

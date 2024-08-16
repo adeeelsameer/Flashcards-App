@@ -16,6 +16,7 @@ import {
 } from '@clerk/nextjs'
 import { styled } from '@mui/material/styles'; // Changed import here
 
+
 export default function pricing() {
     const PlanCard = styled(Card)(({ theme }) => ({
         backgroundColor: '#ADD8E6', // light blue background
@@ -31,6 +32,24 @@ export default function pricing() {
         marginTop: '20px',
         justifyContent: 'center',
     }));
+
+    const handleSubmit = async () => {
+        const checkoutSession = await fetch('/api/checkout_sessions', {
+            method: 'POST',
+            headers: { origin: 'http://localhost:3000' },
+        })
+        const checkoutSessionJson = await checkoutSession.json()
+
+        const stripe = await getStripe()
+        const { error } = await stripe.redirectToCheckout({
+            sessionId: checkoutSessionJson.id,
+        })
+
+        if (error) {
+            console.warn(error.message)
+        }
+    }
+
     return (
         <Box sx={{ my: 6, textAlign: 'center' }}>
             <Typography variant="h4" component="h2" gutterBottom>Pricing</Typography>
