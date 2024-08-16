@@ -12,7 +12,7 @@ import {
     UserButton
 } from '@clerk/nextjs'
 
-const pages = [{ name: 'Products', path: '/products' }, { name: 'Pricing', path: '/pricing' }, { name: 'FAQ', path: '/faq' },]
+const pages = [{ name: 'Home', path: '/' }, { name: 'FAQ', path: '/faq' }]
 
 function ResponsiveAppBar() {
     const [anchorElNav, setAnchorElNav] = React.useState(null);
@@ -88,18 +88,23 @@ function ResponsiveAppBar() {
                             <Button
                                 key={page.name}
                                 onClick={handleCloseNavMenu}
-                                sx={{ my: 2, color: 'white', display: 'block', ":hover": { bgcolor: 'white', color: 'black' } }}
+                                sx={{ textAlign: 'center', my: 1, mx: 3, color: 'white', display: 'block', ":hover": { bgcolor: 'orangered', color: 'white' } }}
                                 href={page.path}
                             >
                                 {page.name}
                             </Button>
                         ))}
                     </Box>
-
                     <Box sx={{ flexGrow: 0 }}>
                         <SignedOut>
-                            <Button color="inherit" href="/sign-in">Login</Button>
-                            <Button color="inherit" href="/sign-up">Sign Up</Button>
+                            <Box display={'flex'} sx={{ my: 1, mx: 3 }}>
+                                <Box>
+                                    <Button sx={{ mx: 1, color: 'white', display: 'block', ":hover": { bgcolor: 'white', color: 'black' } }} href="/sign-up">Sign Up</Button>
+                                </Box>
+                                <Box>
+                                    <Button sx={{ mx: 1, color: 'orangered', ":hover": { bgcolor: 'orangered', color: 'white' } }} href="/sign-in"><b>Login</b></Button>
+                                </Box>
+                            </Box>
                         </SignedOut>
                         <SignedIn>
                             <UserButton />
@@ -107,7 +112,7 @@ function ResponsiveAppBar() {
 
                     </Box>
                 </Toolbar>
-            </Container>
+            </Container >
         </AppBar >
     );
 }

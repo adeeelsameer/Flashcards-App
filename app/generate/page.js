@@ -143,20 +143,29 @@ export default function Generate() {
     <Box width="100%" height="100%">
       <ResponsiveAppBar></ResponsiveAppBar>
 
-      <Box sx={{ my: 4 }}>
-        {flashcardSets.length > 0 && (
-          <Box sx={{ mb: 4, display: 'flex', justifyContent: 'center' }}>
-            <Button
-              variant="contained"
-              color="primary"
-              onClick={() => window.location.href = '/flashcards'}
-            >
-              View Saved Flashcard Sets
-            </Button>
-          </Box>
-        )}
+      <Box display={"flex"} flexDirection="column" justifyContent={"center"} alignItems={"center"} sx={{
+        textAlign: 'center', my: 4, pt: {
+          xs: '56px', md: '64px'
+        }, height: {
+          xs: 'calc(100vh - 56px)',
+          md: 'calc(100vh - 64px)',
+        },
+      }}>
+        {
+          flashcardSets.length > 0 && (
+            <Box sx={{ mb: 4, display: 'flex', justifyContent: 'center' }}>
+              <Button
+                variant="contained"
+                color="primary"
+                onClick={() => window.location.href = '/flashcards'}
+              >
+                View Saved Flashcard Sets
+              </Button>
+            </Box>
+          )
+        }
 
-        <Typography variant="h4" component="h1" gutterBottom>
+        < Typography variant="h4" component="h1" gutterBottom>
           Generate Flashcards
         </Typography>
         <TextField
@@ -202,84 +211,88 @@ export default function Generate() {
         </Button>
       </Box>
 
-      {flashcards.length > 0 && (
-        <Box sx={{ mt: 4 }}>
-          <Typography variant="h5" component="h2" gutterBottom>
-            Generated Flashcards
-          </Typography>
-          <Grid container spacing={3}>
-            {flashcards.map((flashcard, index) => (
-              <Grid item xs={12} sm={6} md={4} key={index}>
-                <Card>
-                  <CardActionArea onClick={() => { handleCardClick(index) }}>
-                    <CardContent>
-                      <Box sx={{
-                        perspective: '1000px',
-                        '& > div': {
-                          bgcolor: "blue",
-                          transition: 'transform 0.6s',
-                          transformStyle: 'preserve-3d',
-                          position: 'relative',
-                          width: '100%',
-                          height: '500px',
-                          boxShadow: '0 4px 8px 0 rgba(0,0,0, 0.2)',
-                          transform: flipped[index] ? 'rotateY(180deg)' : 'rotateY(0deg)',
-                        },
-                        '& > div>div': {
-                          position: 'absolute',
-                          width: '100%',
-                          height: '100%',
-                          backfaceVisibility: 'hidden',
-                          display: 'flex',
-                          justifyContent: 'center',
-                          alignItems: 'center',
-                          padding: '2',
-                          boxSizing: 'border-box',
-                        },
-                        '& > div>div:nth-of-type(2)': {
-                          transform: 'rotateY(180deg)'
-                        },
-                      }}>
-                        <div>
+      {
+        flashcards.length > 0 && (
+          <Box sx={{ mt: 4 }}>
+            <Typography variant="h5" component="h2" gutterBottom>
+              Generated Flashcards
+            </Typography>
+            <Grid container spacing={3}>
+              {flashcards.map((flashcard, index) => (
+                <Grid item xs={12} sm={6} md={4} key={index}>
+                  <Card>
+                    <CardActionArea onClick={() => { handleCardClick(index) }}>
+                      <CardContent>
+                        <Box sx={{
+                          perspective: '1000px',
+                          '& > div': {
+                            bgcolor: "blue",
+                            transition: 'transform 0.6s',
+                            transformStyle: 'preserve-3d',
+                            position: 'relative',
+                            width: '100%',
+                            height: '500px',
+                            boxShadow: '0 4px 8px 0 rgba(0,0,0, 0.2)',
+                            transform: flipped[index] ? 'rotateY(180deg)' : 'rotateY(0deg)',
+                          },
+                          '& > div>div': {
+                            position: 'absolute',
+                            width: '100%',
+                            height: '100%',
+                            backfaceVisibility: 'hidden',
+                            display: 'flex',
+                            justifyContent: 'center',
+                            alignItems: 'center',
+                            padding: '2',
+                            boxSizing: 'border-box',
+                          },
+                          '& > div>div:nth-of-type(2)': {
+                            transform: 'rotateY(180deg)'
+                          },
+                        }}>
                           <div>
-                            <Typography sx={{
-                              fontSize: "30px",
-                              textAlign: "center",
-                              wordBreak: "break-word",
-                              overflowWrap: "break-word",
-                              p: "50px"
-                            }}>
-                              {flashcard.front}
-                            </Typography>
+                            <div>
+                              <Typography sx={{
+                                fontSize: "30px",
+                                textAlign: "center",
+                                wordBreak: "break-word",
+                                overflowWrap: "break-word",
+                                p: "50px"
+                              }}>
+                                {flashcard.front}
+                              </Typography>
+                            </div>
+                            <div>
+                              <Typography sx={{
+                                fontSize: "30px",
+                                textAlign: "center",
+                                wordBreak: "break-word",
+                                overflowWrap: "break-word",
+                                p: "50px"
+                              }}>{flashcard.back}</Typography>
+                            </div>
                           </div>
-                          <div>
-                            <Typography sx={{
-                              fontSize: "30px",
-                              textAlign: "center",
-                              wordBreak: "break-word",
-                              overflowWrap: "break-word",
-                              p: "50px"
-                            }}>{flashcard.back}</Typography>
-                          </div>
-                        </div>
-                      </Box>
-                    </CardContent>
-                  </CardActionArea>
-                </Card>
+                        </Box>
+                      </CardContent>
+                    </CardActionArea>
+                  </Card>
 
-              </Grid>
-            ))}
-          </Grid>
-        </Box>
-      )}
+                </Grid>
+              ))}
+            </Grid>
+          </Box>
+        )
+      }
 
-      {flashcards.length > 0 && (
-        <Box sx={{ mt: 4, display: 'flex', justifyContent: 'center' }}>
-          <Button variant="contained" color="primary" onClick={handleOpenDialog}>
-            Save Flashcards
-          </Button>
-        </Box>
-      )}
+      {
+        flashcards.length > 0 && (
+          <Box sx={{ mt: 4, display: 'flex', justifyContent: 'center' }}>
+            <Button variant="contained" color="primary" onClick={handleOpenDialog}>
+              Save Flashcards
+            </Button>
+          </Box>
+        )
+      }
 
       <Dialog open={dialogOpen} onClose={handleCloseDialog}>
         <DialogTitle>Save Flashcard Set</DialogTitle>
@@ -304,6 +317,6 @@ export default function Generate() {
           </Button>
         </DialogActions>
       </Dialog>
-    </Box>
+    </Box >
   )
 }
