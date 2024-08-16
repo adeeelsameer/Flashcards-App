@@ -6,7 +6,7 @@ import ResponsiveAppBar from "./components/Navbar";
 export default function Home() {
 
   return (
-    <Box width="100%" height="100%" sx={{ backgroundImage: 'linear-gradient(to right, #121212, #2c2c2c)', color: 'white' }}>
+    <Box width="100vw" height="100vh" sx={{ backgroundImage: 'linear-gradient(to right, #121212, #2c2c2c)', color: 'white' }}>
       <ResponsiveAppBar />
       <Box display={"flex"} flexDirection="column" justifyContent={"center"} alignItems={"center"} sx={{
         textAlign: 'center', my: 4, pt: {

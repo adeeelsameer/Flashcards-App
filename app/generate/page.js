@@ -19,8 +19,8 @@ import {
   CardActionArea,
   Fab,
 } from '@mui/material';
-import { Add as AddIcon } from '@mui/icons-material';
-import { SignedIn, SignedOut, UserButton, useUser } from '@clerk/nextjs';
+import { Add as AddIcon, Visibility as VisibilityIcon } from '@mui/icons-material';
+import { useUser } from '@clerk/nextjs';
 import { collection, getDoc, getDocs, doc, setDoc } from "firebase/firestore";
 import ResponsiveAppBar from '../components/Appbar';
 
@@ -135,7 +135,7 @@ export default function Generate() {
   };
 
   return (
-    <Box width="100%" height="100%" sx={{ backgroundColor: '#121212', color: 'white' }}>
+    <Box width="100vw" height="100vh" sx={{ backgroundImage: 'linear-gradient(to right, #121212, #2c2c2c)', color: 'white' }}>
       <ResponsiveAppBar />
 
       <Box display={"flex"} flexDirection={"column"} justifyContent={"center"} alignItems={"center"} sx={{
@@ -151,16 +151,35 @@ export default function Generate() {
         </Typography>
 
         <Typography variant="h6" sx={{ color: '#b0b0b0', mb: 2 }}>
-          Use the button below to create a new set of flashcards.
+          Use the + button to create a new flashcard.
         </Typography>
 
-        <Fab color="primary" aria-label="add" onClick={handleOpenCreateDialog} sx={{ mt: 2, bgcolor: '#1f1f1f', color: '#bb86fc', '&:hover': { bgcolor: '#3700b3' } }}>
-          <AddIcon />
-        </Fab>
+        {flashcardSets.length > 0 && (<Box sx={{ display: 'flex', gap: 2, mt: 2 }}>
+          <Button
+            variant="contained"
+            color="primary"
+            sx={{
+              backgroundColor: '#bb86fc',
+              color: 'white',
+              px: 3,
+              py: 1,
+              borderRadius: '20px',
+              boxShadow: '0 4px 10px rgba(0, 0, 0, 0.3)',
+              transition: 'background-color 0.3s, transform 0.3s',
+              '&:hover': {
+                backgroundColor: '#3700b3',
+                transform: 'scale(1.05)',
+              },
+            }}
+            href="/flashcards"
+          >
+            View Saved Flashcards
+          </Button>
+        </Box>)}
       </Box>
 
       {flashcards.length > 0 && (
-        <Box ref={flashcardsRef} sx={{ mt: 4, p: 2 }}>
+        <Box ref={flashcardsRef} sx={{ mt: 10, p: 2 }}>
           <Typography variant="h5" component="h2" gutterBottom sx={{ textAlign: 'center', mb: 3, color: '#f0f0f0' }}>
             Generated Flashcards
           </Typography>
@@ -211,6 +230,7 @@ export default function Generate() {
                               p: "20px",
                               color: '#f0f0f0'
                             }}>
+
                               {flashcard.front}
                             </Typography>
                           </div>
@@ -252,6 +272,21 @@ export default function Generate() {
           </Box>
         </Box>
       )}
+
+      <Fab color="primary" aria-label="add" onClick={handleOpenCreateDialog} sx={{
+        position: 'fixed',
+        bottom: 16,
+        right: 16,
+        bgcolor: '#bb86fc',
+        color: '#121212',
+        '&:hover': {
+          bgcolor: '#3700b3',
+          transform: 'scale(1.1)',
+        },
+        transition: 'transform 0.3s ease-in-out',
+      }}>
+        <AddIcon />
+      </Fab>
 
       <Dialog open={createDialogOpen} onClose={handleCloseCreateDialog} PaperProps={{ sx: { backgroundColor: '#1f1f1f', color: '#f0f0f0' } }}>
         <DialogTitle sx={{ color: '#bb86fc' }}>Enter Text to Generate Flashcards</DialogTitle>
@@ -309,6 +344,6 @@ export default function Generate() {
           </Button>
         </DialogActions>
       </Dialog>
-    </Box>
+    </Box >
   );
 }

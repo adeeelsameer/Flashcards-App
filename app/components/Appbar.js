@@ -6,7 +6,7 @@ import { Box, Typography, AppBar, Toolbar, Button, IconButton, Menu, Container, 
 import MenuIcon from '@mui/icons-material/Menu';
 import { SignedIn, SignedOut, UserButton } from '@clerk/nextjs';
 
-const pages = [{ name: 'Home', path: '/' }, { name: 'FAQ', path: '/faq' }, { name: 'Saved Flashcards', path: '/flashcards' }];
+const pages = [{ name: 'Home', path: '/' }, { name: 'FAQ', path: '/faq' },];
 
 function ResponsiveAppBar() {
     const [anchorElNav, setAnchorElNav] = React.useState(null);
