@@ -46,7 +46,7 @@ export default function Home() {
             color: '#bb86fc',
             mt: 2,
             "&:hover": { backgroundColor: '#3700b3', color: 'white', borderColor: '#3700b3' },
-          }} href="/learn-more">
+          }} href="/faq">
             Learn More
           </Button>
         </Box>
