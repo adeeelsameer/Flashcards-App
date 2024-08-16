@@ -15,22 +15,22 @@ import ResponsiveAppBar from '../components/Appbar';
 
 export default function Pricing() {
   const PlanCard = styled(Card)(({ theme }) => ({
-    backgroundColor: '#1f1f1f', // dark background
-    color: '#bb86fc', // primary color for text
+    backgroundColor: '#1f1f1f',
+    color: '#bb86fc',
     borderRadius: '10px',
     padding: '20px',
     textAlign: 'center',
-    minHeight: '400px', // Increased min height for longer appearance
+    minHeight: '400px',
     boxShadow: '0 4px 20px rgba(0, 0, 0, 0.3)',
     transition: 'transform 0.3s, background-color 0.3s',
     '&:hover': {
       transform: 'scale(1.05)',
-      backgroundColor: '#3700b3', // darker shade on hover
+      backgroundColor: '#3700b3',
     },
   }));
 
   const PlanContainer = styled(Grid)(({ theme }) => ({
-    marginTop: '40px', // Increased margin for more space
+    marginTop: '40px',
     justifyContent: 'center',
   }));
 
@@ -38,7 +38,7 @@ export default function Pricing() {
     <Box sx={{ backgroundColor: '#121212', color: '#f0f0f0', minHeight: '100vh' }}>
       <ResponsiveAppBar /> {/* Navbar */}
 
-      <Container maxWidth="lg" sx={{ paddingTop: '80px' }}> {/* Add paddingTop to account for the navbar */}
+      <Container maxWidth="lg" sx={{ paddingTop: '80px' }}>
         <Box sx={{ my: 6, textAlign: 'center' }}>
           <Typography variant="h4" component="h2" gutterBottom>
             Pricing
@@ -73,7 +73,7 @@ export default function Pricing() {
                       backgroundColor: '#bb86fc',
                       color: '#121212',
                       '&:hover': {
-                        backgroundColor: '#f0f0f0', // Change hover color for visibility
+                        backgroundColor: '#f0f0f0',
                         color: '#121212',
                       },
                     }}
@@ -109,7 +109,7 @@ export default function Pricing() {
                       backgroundColor: '#bb86fc',
                       color: '#121212',
                       '&:hover': {
-                        backgroundColor: '#f0f0f0', // Change hover color for visibility
+                        backgroundColor: '#f0f0f0',
                         color: '#121212',
                       },
                     }}
@@ -151,7 +151,7 @@ export default function Pricing() {
                       backgroundColor: '#bb86fc',
                       color: '#121212',
                       '&:hover': {
-                        backgroundColor: '#f0f0f0', // Change hover color for visibility
+                        backgroundColor: '#f0f0f0',
                         color: '#121212',
                       },
                     }}
