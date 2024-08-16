@@ -27,6 +27,7 @@ import {
   useUser
 } from '@clerk/nextjs'
 import { collection, getDoc, getDocs, doc, setDoc } from "firebase/firestore";
+import ResponsiveAppBar from '../components/Appbar'
 
 export default function Generate() {
   const { user } = useUser();
@@ -36,9 +37,8 @@ export default function Generate() {
   const [setName, setSetName] = useState('')
   const [dialogOpen, setDialogOpen] = useState(false)
   const [loading, setLoading] = useState(false)
-  const [flashcardSets, setFlashcardSets] = useState([]);  
+  const [flashcardSets, setFlashcardSets] = useState([]);
   const [flipped, setFlipped] = useState([])
-  const [isFlipped, setIsFlipped] = useState(false)
 
   // Fetch flashcard sets when the component mounts
   useEffect(() => {
@@ -59,7 +59,7 @@ export default function Generate() {
 
     fetchFlashcardSets();
   }, [user]);
-  
+
   const handleSetClick = (setName) => {
     window.location.href = `/flashcards/${setName}`;
   };
@@ -92,7 +92,7 @@ export default function Generate() {
       console.error('Error generating flashcards:', error)
       alert('An error occurred while generating flashcards. Please try again.')
     } finally {
-      setLoading(false) 
+      setLoading(false)
     }
   }
 
@@ -141,20 +141,7 @@ export default function Generate() {
 
   return (
     <Box width="100%" height="100%">
-      <AppBar position="static">
-        <Toolbar>
-          <Typography variant="h6" style={{ flexGrow: 1 }}>
-            FLASHIFY
-          </Typography>
-          <SignedOut>
-            <Button color="inherit" href="/sign-in">Login</Button>
-            <Button color="inherit" href="/sign-up">Sign Up</Button>
-          </SignedOut>
-          <SignedIn>
-            <UserButton />
-          </SignedIn>
-        </Toolbar>
-      </AppBar>
+      <ResponsiveAppBar></ResponsiveAppBar>
 
       <Box sx={{ my: 4 }}>
         {flashcardSets.length > 0 && (

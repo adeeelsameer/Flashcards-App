@@ -9,7 +9,7 @@ import {
   SignedOut,
   UserButton
 } from '@clerk/nextjs'
-import ResponsiveAppBar from "./components/Navbar";
+import ResponsiveNavBar from "./components/Navbar";
 
 
 export default function Home() {
@@ -33,7 +33,7 @@ export default function Home() {
 
   return (
     <Box bgcolor={"black"} width="100%" height="100%" color="white">
-      <ResponsiveAppBar></ResponsiveAppBar>
+      <ResponsiveNavBar></ResponsiveNavBar>
       <Box display={"flex"} flexDirection="column" justifyContent={"center"} alignItems={"center"} sx={{
         textAlign: 'center', my: 4, pt: {
           xs: '56px', md: '64px'
@@ -58,24 +58,29 @@ export default function Home() {
           The easiest way to create flashcards using your text.
         </Typography>
         <Box m="30px">
-          <Button variant="contained" color="primary" sx={{ mt: 2, mr: 2 }} href="/generate">
+          <Button variant="contained" color="primary" sx={{ bgcolor: 'white', color: 'black', mt: 2, mr: 2, ":hover": { bgcolor: 'orangered', color: 'white' } }} href="/generate">
             Get Started
           </Button>
 
-          <Button variant="outlined" color="primary" sx={{ mt: 2 }} href="/learn-more">
+          <Button
+            variant="outlined"
+            color="primary"
+            sx={{
+              mt: 2,
+              borderColor: 'white',
+              color: 'white',
+              ":hover": {
+                borderColor: 'orangered',
+                bgcolor: 'transparent',
+                color: "orangered"
+              }
+            }}
+            href="/learn-more"
+          >
             Learn More
           </Button>
         </Box>
       </Box>
-
-      <Box sx={{ my: 6 }}>
-        <Typography variant="h4" component="h2" gutterBottom>Features</Typography>
-        <Grid container spacing={4}>
-          {/* Feature items */}
-        </Grid>
-      </Box>
-
-
     </Box >
   );
 }
