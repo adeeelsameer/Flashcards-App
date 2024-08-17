@@ -1,4 +1,8 @@
+'use client';
+
 import React from 'react';
+import ResponsiveAppBar from '../components/Appbar';
+import { Container, Typography, Box, Grid, Paper } from '@mui/material';
 
 const FaqPage = () => {
     const faqs = [
@@ -33,17 +37,28 @@ const FaqPage = () => {
     ];
 
     return (
-        <div style={{ padding: '20px', maxWidth: '800px', margin: '0 auto', backgroundColor: '#000' }}>
-            <h1 style={{ textAlign: 'center', marginBottom: '30px', color: '#fff' }}>Frequently Asked Questions</h1>
-            <div>
-                {faqs.map((faq, index) => (
-                    <div key={index} style={{ marginBottom: '20px', padding: '10px', borderBottom: '1px solid #333' }}>
-                        <h3 style={{ margin: '0 0 10px', color: '#eee' }}>{faq.question}</h3>
-                        <p style={{ margin: '0', color: '#ccc' }}>{faq.answer}</p>
-                    </div>
-                ))}
-            </div>
-        </div>
+        <Box sx={{ backgroundColor: '#121212', color: '#fff' }}>
+            <ResponsiveAppBar />
+            <Container maxWidth="md" sx={{ paddingTop: '100px', paddingBottom: '40px' }}>
+                <Typography variant="h3" align="center" gutterBottom sx={{ color: '#bb86fc', textShadow: '0 0 10px #3700b3', marginBottom: '30px' }}>
+                    Frequently Asked Questions
+                </Typography>
+                <Grid container spacing={4}>
+                    {faqs.map((faq, index) => (
+                        <Grid item xs={12} key={index}>
+                            <Paper elevation={3} sx={{ padding: '20px', backgroundColor: '#1f1f1f', '&:hover': { backgroundColor: '#2c2c2c' } }}>
+                                <Typography variant="h5" gutterBottom sx={{ color: '#bb86fc', textShadow: '0 0 5px #3700b3' }}>
+                                    {faq.question}
+                                </Typography>
+                                <Typography variant="body1" sx={{ color: '#f0f0f0' }}>
+                                    {faq.answer}
+                                </Typography>
+                            </Paper>
+                        </Grid>
+                    ))}
+                </Grid>
+            </Container>
+        </Box>
     );
 };
 
