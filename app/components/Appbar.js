@@ -61,10 +61,34 @@ function ResponsiveAppBar() {
                             sx={{
                                 display: { xs: 'block', md: 'none' },
                             }}
+                            PaperProps={{
+                                sx: {
+                                    bgcolor: '#1f1f1f',
+                                    color: '#f0f0f0',
+                                    margin: 0,
+                                    padding: 1,
+                                    boxShadow: 'none',
+
+                                },
+                            }}
                         >
                             {pages.map((page) => (
-                                <MenuItem key={page.name} onClick={handleCloseNavMenu}>
-                                    <Typography sx={{ textAlign: "center", color: "#f0f0f0" }} >{page.name}</Typography>
+                                <MenuItem
+                                    key={page.name}
+                                    onClick={handleCloseNavMenu}
+                                    sx={{
+                                        color: '#f0f0f0',
+                                        bgcolor: '#1f1f1f',
+                                        textShadow: '0 0 10px #bb86fc, 0 0 20px #3700b3',
+                                        fontFamily: 'Arial, sans-serif',
+                                        ":hover": {
+                                            bgcolor: '#3700b3',
+                                            color: '#ffffff',
+                                        },
+                                        p: 1,
+                                    }}
+                                >
+                                    <Typography sx={{ textAlign: "center", color: "#" }} >{page.name}</Typography>
                                 </MenuItem>
                             ))}
                         </Menu>
