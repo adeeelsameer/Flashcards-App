@@ -30,12 +30,22 @@ const StyledAvatar = styled(Avatar)(({ theme }) => ({
   marginBottom: '10px',
 }));
 
+// Style for the heading
+const Heading = styled(Typography)(({ theme }) => ({
+  fontSize: '2.5rem',
+  fontWeight: 'bold',
+  color: '#bb86fc',
+  textShadow: '0 0 10px #3700b3, 0 0 20px #3700b3, 0 0 30px #3700b3, 0 0 40px #bb86fc',
+  fontFamily: 'Roboto, sans-serif',
+  marginBottom: theme.spacing(4),
+}));
+
 export default function AboutUs() {
   return (
     <TeamSection>
-      <Typography variant="h4" component="h1" gutterBottom>
+      <Heading variant="h4" component="h1" gutterBottom>
         Meet the Devs
-      </Typography>
+      </Heading>
       <Grid container spacing={4} justifyContent="center">
         <Grid item xs={12} sm={6} md={3}>
           <TeamMember>
