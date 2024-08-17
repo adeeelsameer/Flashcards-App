@@ -7,8 +7,6 @@ import {
     CardContent,
     Box,
     Container,
-    AppBar,
-    Toolbar,
 } from '@mui/material'
 import { styled } from '@mui/material/styles';
 import ResponsiveAppBar from '../components/Appbar';
@@ -21,35 +19,23 @@ export default function Pricing() {
         padding: '20px',
         textAlign: 'center',
         minHeight: '400px',
+        display: 'flex',
+        flexDirection: 'column',
+        justifyContent: 'space-between',
         boxShadow: '0 4px 20px rgba(0, 0, 0, 0.3)',
         transition: 'transform 0.3s, background-color 0.3s',
         '&:hover': {
             transform: 'scale(1.05)',
             backgroundColor: '#3700b3',
         },
+        height: '100%',
     }));
 
     const PlanContainer = styled(Grid)(({ theme }) => ({
         marginTop: '40px',
         justifyContent: 'center',
+        alignItems: 'stretch',
     }));
-
-    const handleSubmit = async () => {
-        const checkoutSession = await fetch('/api/checkout_sessions', {
-            method: 'POST',
-            headers: { origin: 'http://localhost:3000' },
-        })
-        const checkoutSessionJson = await checkoutSession.json()
-
-        const stripe = await getStripe()
-        const { error } = await stripe.redirectToCheckout({
-            sessionId: checkoutSessionJson.id,
-        })
-
-        if (error) {
-            console.warn(error.message)
-        }
-    }
 
     return (
         <Box sx={{ backgroundColor: '#121212', color: '#f0f0f0', minHeight: '100vh' }}>
@@ -64,10 +50,10 @@ export default function Pricing() {
                         Choose the plan that best suits your needs. Each plan comes with its own set of features to help you maximize your learning.
                     </Typography>
 
-                    <PlanContainer container spacing={4} justifyContent="center">
+                    <PlanContainer container spacing={4}>
                         <Grid item xs={12} md={4}>
                             <PlanCard>
-                                <CardContent>
+                                <CardContent sx={{ flexGrow: 1 }}>
                                     <Typography variant="h5" component="div" gutterBottom>
                                         Bronze Plan
                                     </Typography>
@@ -83,10 +69,11 @@ export default function Pricing() {
                                     <Typography variant="body1" gutterBottom>
                                         Custom flashcard creation
                                     </Typography>
+                                </CardContent>
+                                <Box sx={{ textAlign: 'center', mt: 'auto', pb: 2 }}>
                                     <Button
                                         variant="contained"
                                         sx={{
-                                            marginTop: '20px',
                                             backgroundColor: '#bb86fc',
                                             color: '#121212',
                                             '&:hover': {
@@ -97,13 +84,13 @@ export default function Pricing() {
                                     >
                                         Choose Plan
                                     </Button>
-                                </CardContent>
+                                </Box>
                             </PlanCard>
                         </Grid>
 
                         <Grid item xs={12} md={4}>
                             <PlanCard>
-                                <CardContent>
+                                <CardContent sx={{ flexGrow: 1 }}>
                                     <Typography variant="h5" component="div" gutterBottom>
                                         Silver Plan
                                     </Typography>
@@ -119,10 +106,11 @@ export default function Pricing() {
                                     <Typography variant="body1" gutterBottom>
                                         Custom flashcard creation
                                     </Typography>
+                                </CardContent>
+                                <Box sx={{ textAlign: 'center', mt: 'auto', pb: 2 }}>
                                     <Button
                                         variant="contained"
                                         sx={{
-                                            marginTop: '20px',
                                             backgroundColor: '#bb86fc',
                                             color: '#121212',
                                             '&:hover': {
@@ -133,15 +121,15 @@ export default function Pricing() {
                                     >
                                         Choose Plan
                                     </Button>
-                                </CardContent>
+                                </Box>
                             </PlanCard>
                         </Grid>
 
                         <Grid item xs={12} md={4}>
                             <PlanCard>
-                                <CardContent>
+                                <CardContent sx={{ flexGrow: 1 }}>
                                     <Typography variant="h5" component="div" gutterBottom>
-                                        Gold Plan [Join Waitlist to Access]
+                                        Gold Plan
                                     </Typography>
                                     <Typography variant="h6" sx={{ color: '#b0b0b0' }}>
                                         $20/month
@@ -161,10 +149,11 @@ export default function Pricing() {
                                     <Typography variant="body1" gutterBottom>
                                         Custom flashcard creation with images
                                     </Typography>
+                                </CardContent>
+                                <Box sx={{ textAlign: 'center', mt: 'auto', pb: 2 }}>
                                     <Button
                                         variant="contained"
                                         sx={{
-                                            marginTop: '20px',
                                             backgroundColor: '#bb86fc',
                                             color: '#121212',
                                             '&:hover': {
@@ -175,7 +164,7 @@ export default function Pricing() {
                                     >
                                         Join Waitlist
                                     </Button>
-                                </CardContent>
+                                </Box>
                             </PlanCard>
                         </Grid>
                     </PlanContainer>
