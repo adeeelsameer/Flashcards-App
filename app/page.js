@@ -3,8 +3,8 @@ import Image from "next/image";
 import { Container, Box, Typography, Button, Grid } from '@mui/material'
 import { styled } from '@mui/material/styles';
 import ResponsiveAppBar from "./components/Navbar";
-export default function Home() {
 
+export default function Home() {
   return (
     <Box width="100vw" height="100vh" sx={{ backgroundImage: 'linear-gradient(to right, #121212, #2c2c2c)', color: 'white' }}>
       <ResponsiveAppBar />
@@ -30,12 +30,10 @@ export default function Home() {
         }}>
           The easiest way to create flashcards using your text.
         </Typography>
-        <Box m="30px">
+        <Box mt="30px" display="flex" flexDirection="row" gap="16px">
           <Button variant="contained" sx={{
             backgroundColor: '#bb86fc',
             color: 'white',
-            mt: 2,
-            mr: 2,
             "&:hover": { backgroundColor: '#3700b3', color: 'white' },
           }} href="/generate">
             Get Started
@@ -44,10 +42,17 @@ export default function Home() {
           <Button variant="outlined" sx={{
             borderColor: '#bb86fc',
             color: '#bb86fc',
-            mt: 2,
             "&:hover": { backgroundColor: '#3700b3', color: 'white', borderColor: '#3700b3' },
           }} href="/faq">
             Learn More
+          </Button>
+
+          <Button variant="outlined" sx={{
+            borderColor: '#bb86fc',
+            color: '#bb86fc',
+            "&:hover": { backgroundColor: '#3700b3', color: 'white', borderColor: '#3700b3' },
+          }} href="/aboutus">
+            Meet the Devs
           </Button>
         </Box>
       </Box>
