@@ -1,7 +1,7 @@
 'use client'
 import { Box, Typography, Grid, Avatar } from '@mui/material';
 import { styled } from '@mui/material/styles';
-import ResponsiveAppBar from '../components/Appbar';
+import ResponsiveAppBar from '../components/AppbarAboutUs';
 
 // Style for the section
 const TeamSection = styled(Box)(({ theme }) => ({

@@ -1,7 +1,7 @@
 'use client';
 
 import React from 'react';
-import ResponsiveAppBar from '../components/Appbar';
+import ResponsiveNavBarFaq from '../components/AppBarFaq'
 import { Container, Typography, Box, Grid, Paper } from '@mui/material';
 
 const FaqPage = () => {
@@ -38,7 +38,7 @@ const FaqPage = () => {
 
     return (
         <Box sx={{ backgroundColor: '#121212', color: '#fff' }}>
-            <ResponsiveAppBar />
+            <ResponsiveNavBarFaq />
             <Container maxWidth="md" sx={{ paddingTop: '100px', paddingBottom: '40px' }}>
                 <Typography variant="h3" align="center" gutterBottom sx={{ color: '#bb86fc', textShadow: '0 0 10px #3700b3', marginBottom: '30px' }}>
                     Frequently Asked Questions

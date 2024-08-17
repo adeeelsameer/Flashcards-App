@@ -4,35 +4,19 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { Box, Typography, AppBar, Toolbar, Button, IconButton, Menu, Container, MenuItem } from '@mui/material';
 import MenuIcon from '@mui/icons-material/Menu';
-import {
-    SignedIn,
-    SignedOut,
-    UserButton
-} from '@clerk/nextjs';
+import { SignedIn, SignedOut, UserButton } from '@clerk/nextjs';
 
-const pages = [
-    { name: 'Home', path: '/' },
-    { name: 'Pricing', path: '/pricing' },
-    { name: 'About Us', path: '/aboutus' }
-];
+const pages = [{ name: 'Home', path: '/' }, { name: 'Pricing', path: '/pricing' }, { name: 'FAQ', path: '/faq' },];
 
-function ResponsiveNavBarFaq() {
+function ResponsiveAppBar() {
     const [anchorElNav, setAnchorElNav] = React.useState(null);
-    const [anchorElUser, setAnchorElUser] = React.useState(null);
 
     const handleOpenNavMenu = (event) => {
         setAnchorElNav(event.currentTarget);
     };
-    const handleOpenUserMenu = (event) => {
-        setAnchorElUser(event.currentTarget);
-    };
 
     const handleCloseNavMenu = () => {
         setAnchorElNav(null);
-    };
-
-    const handleCloseUserMenu = () => {
-        setAnchorElUser(null);
     };
 
     return (
@@ -42,10 +26,10 @@ function ResponsiveNavBarFaq() {
                     <Box m="3px" sx={{ display: { xs: 'none', md: 'flex' } }}>
                         <Link href="/">
                             <Image
-                                src="/images/logo.png" // Path to the image in the public folder
+                                src="/images/logo.png"
                                 alt="Logo"
-                                width={75} // Set your desired width
-                                height={75} // Set your desired height
+                                width={75}
+                                height={75}
                             />
                         </Link>
                     </Box>
@@ -84,6 +68,7 @@ function ResponsiveNavBarFaq() {
                                     margin: 0,
                                     padding: 1,
                                     boxShadow: 'none',
+
                                 },
                             }}
                         >
@@ -92,17 +77,18 @@ function ResponsiveNavBarFaq() {
                                     key={page.name}
                                     onClick={handleCloseNavMenu}
                                     sx={{
-                                        color: '#f0f0f0', // Change the text color to match the theme
-                                        bgcolor: '#1f1f1f', // Set background color to match the AppBar
-                                        textShadow: '0 0 10px #bb86fc, 0 0 20px #3700b3', // Adjust the text shadow for visibility
+                                        color: '#f0f0f0',
+                                        bgcolor: '#1f1f1f',
+                                        textShadow: '0 0 10px #bb86fc, 0 0 20px #3700b3',
                                         fontFamily: 'Arial, sans-serif',
                                         ":hover": {
-                                            bgcolor: '#3700b3', // Change background color on hover
-                                            color: '#ffffff' // Ensure text is visible on hover
-                                        }
+                                            bgcolor: '#3700b3',
+                                            color: '#ffffff',
+                                        },
+                                        p: 1,
                                     }}
                                 >
-                                    <Typography sx={{ textAlign: "center", color: "#f0f0f0" }}>{page.name}</Typography>
+                                    <Typography sx={{ textAlign: "center", color: "#" }} >{page.name}</Typography>
                                 </MenuItem>
                             ))}
                         </Menu>
@@ -142,5 +128,4 @@ function ResponsiveNavBarFaq() {
         </AppBar>
     );
 }
-
-export default ResponsiveNavBarFaq;
+export default ResponsiveAppBar;
