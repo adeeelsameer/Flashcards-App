@@ -1,6 +1,7 @@
 'use client'
 import { Box, Typography, Grid, Avatar } from '@mui/material';
 import { styled } from '@mui/material/styles';
+import ResponsiveAppBar from '../components/Appbar';
 
 // Style for the section
 const TeamSection = styled(Box)(({ theme }) => ({
@@ -42,40 +43,43 @@ const Heading = styled(Typography)(({ theme }) => ({
 
 export default function AboutUs() {
   return (
-    <TeamSection>
-      <Heading variant="h4" component="h1" gutterBottom>
-        Meet the Devs
-      </Heading>
-      <Grid container spacing={4} justifyContent="center">
-        <Grid item xs={12} sm={6} md={3}>
-          <TeamMember>
-            <StyledAvatar src="/path-to-adil-headshot.jpg" alt="Adil Sameer" />
-            <Typography variant="h6">Adil Sameer</Typography>
-            <Typography variant="body1">This is a sample intro text</Typography>
-          </TeamMember>
+    <Box>
+      <ResponsiveAppBar />
+      <TeamSection>
+        <Heading variant="h4" component="h1" gutterBottom>
+          Meet the Devs
+        </Heading>
+        <Grid container spacing={4} justifyContent="center">
+          <Grid item xs={12} sm={6} md={3}>
+            <TeamMember>
+              <StyledAvatar src="/path-to-adil-headshot.jpg" alt="Adil Sameer" />
+              <Typography variant="h6">Adil Sameer</Typography>
+              <Typography variant="body1">This is a sample intro text</Typography>
+            </TeamMember>
+          </Grid>
+          <Grid item xs={12} sm={6} md={3}>
+            <TeamMember>
+              <StyledAvatar src="/path-to-bhavana-headshot.jpg" alt="Bhavana Gupta" />
+              <Typography variant="h6">Bhavana Gupta</Typography>
+              <Typography variant="body1">This is a sample intro text</Typography>
+            </TeamMember>
+          </Grid>
+          <Grid item xs={12} sm={6} md={3}>
+            <TeamMember>
+              <StyledAvatar src="/path-to-rabia-headshot.jpg" alt="Rabia Ghafoor" />
+              <Typography variant="h6">Rabia Ghafoor</Typography>
+              <Typography variant="body1">This is a sample intro text</Typography>
+            </TeamMember>
+          </Grid>
+          <Grid item xs={12} sm={6} md={3}>
+            <TeamMember>
+              <StyledAvatar src="/path-to-vivek-headshot.jpg" alt="Vivek Vardhan" />
+              <Typography variant="h6">Vivek Vardhan</Typography>
+              <Typography variant="body1">This is a sample intro text</Typography>
+            </TeamMember>
+          </Grid>
         </Grid>
-        <Grid item xs={12} sm={6} md={3}>
-          <TeamMember>
-            <StyledAvatar src="/path-to-bhavana-headshot.jpg" alt="Bhavana Gupta" />
-            <Typography variant="h6">Bhavana Gupta</Typography>
-            <Typography variant="body1">This is a sample intro text</Typography>
-          </TeamMember>
-        </Grid>
-        <Grid item xs={12} sm={6} md={3}>
-          <TeamMember>
-            <StyledAvatar src="/path-to-rabia-headshot.jpg" alt="Rabia Ghafoor" />
-            <Typography variant="h6">Rabia Ghafoor</Typography>
-            <Typography variant="body1">This is a sample intro text</Typography>
-          </TeamMember>
-        </Grid>
-        <Grid item xs={12} sm={6} md={3}>
-          <TeamMember>
-            <StyledAvatar src="/path-to-vivek-headshot.jpg" alt="Vivek Vardhan" />
-            <Typography variant="h6">Vivek Vardhan</Typography>
-            <Typography variant="body1">This is a sample intro text</Typography>
-          </TeamMember>
-        </Grid>
-      </Grid>
-    </TeamSection>
+      </TeamSection>
+    </Box>
   );
 }

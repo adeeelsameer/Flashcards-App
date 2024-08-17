@@ -4,19 +4,35 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { Box, Typography, AppBar, Toolbar, Button, IconButton, Menu, Container, MenuItem } from '@mui/material';
 import MenuIcon from '@mui/icons-material/Menu';
-import { SignedIn, SignedOut, UserButton } from '@clerk/nextjs';
+import {
+    SignedIn,
+    SignedOut,
+    UserButton
+} from '@clerk/nextjs';
 
-const pages = [{ name: 'Home', path: '/' }, { name: 'FAQ', path: '/faq' }, { name: 'About Us', path: '/aboutus' },];
+const pages = [
+    { name: 'Pricing', path: '/pricing' },
+    { name: 'FAQ', path: '/faq' },
+    { name: 'About Us', path: '/aboutus' }
+];
 
-function ResponsiveAppBar() {
+function ResponsiveNavBarFaq() {
     const [anchorElNav, setAnchorElNav] = React.useState(null);
+    const [anchorElUser, setAnchorElUser] = React.useState(null);
 
     const handleOpenNavMenu = (event) => {
         setAnchorElNav(event.currentTarget);
     };
+    const handleOpenUserMenu = (event) => {
+        setAnchorElUser(event.currentTarget);
+    };
 
     const handleCloseNavMenu = () => {
         setAnchorElNav(null);
+    };
+
+    const handleCloseUserMenu = () => {
+        setAnchorElUser(null);
     };
 
     return (
@@ -68,7 +84,6 @@ function ResponsiveAppBar() {
                                     margin: 0,
                                     padding: 1,
                                     boxShadow: 'none',
-
                                 },
                             }}
                         >
@@ -77,18 +92,17 @@ function ResponsiveAppBar() {
                                     key={page.name}
                                     onClick={handleCloseNavMenu}
                                     sx={{
-                                        color: '#f0f0f0',
-                                        bgcolor: '#1f1f1f',
-                                        textShadow: '0 0 10px #bb86fc, 0 0 20px #3700b3',
+                                        color: '#f0f0f0', // Change the text color to match the theme
+                                        bgcolor: '#1f1f1f', // Set background color to match the AppBar
+                                        textShadow: '0 0 10px #bb86fc, 0 0 20px #3700b3', // Adjust the text shadow for visibility
                                         fontFamily: 'Arial, sans-serif',
                                         ":hover": {
-                                            bgcolor: '#3700b3',
-                                            color: '#ffffff',
-                                        },
-                                        p: 1,
+                                            bgcolor: '#3700b3', // Change background color on hover
+                                            color: '#ffffff' // Ensure text is visible on hover
+                                        }
                                     }}
                                 >
-                                    <Typography sx={{ textAlign: "center", color: "#" }} >{page.name}</Typography>
+                                    <Typography sx={{ textAlign: "center", color: "#f0f0f0" }}>{page.name}</Typography>
                                 </MenuItem>
                             ))}
                         </Menu>
@@ -128,4 +142,5 @@ function ResponsiveAppBar() {
         </AppBar>
     );
 }
-export default ResponsiveAppBar;
+
+export default ResponsiveNavBarFaq;

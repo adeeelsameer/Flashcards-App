@@ -11,9 +11,9 @@ import {
 } from '@clerk/nextjs';
 
 const pages = [
-    { name: 'Products', path: '/products' },
     { name: 'Pricing', path: '/pricing' },
     { name: 'FAQ', path: '/faq' },
+    { name: 'About Us', path: '/aboutus' }
 ];
 
 function ResponsiveNavBar() {
