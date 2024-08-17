@@ -7,9 +7,12 @@ import {
     CardContent,
     Box,
     Container,
+    AppBar,
+    Toolbar,
 } from '@mui/material'
 import { styled } from '@mui/material/styles';
 import ResponsiveAppBar from '../components/Appbar';
+import getStripe from '@/utils/get-stripe.js'; // Import getStripe utility
 
 export default function Pricing() {
     const PlanCard = styled(Card)(({ theme }) => ({
@@ -34,8 +37,24 @@ export default function Pricing() {
     const PlanContainer = styled(Grid)(({ theme }) => ({
         marginTop: '40px',
         justifyContent: 'center',
-        alignItems: 'stretch',
     }));
+
+    const handleSubmit = async () => {
+        const checkoutSession = await fetch('/api/checkout_sessions', {
+            method: 'POST',
+            headers: { origin: 'http://localhost:3000' },
+        })
+        const checkoutSessionJson = await checkoutSession.json()
+
+        const stripe = await getStripe()
+        const { error } = await stripe.redirectToCheckout({
+            sessionId: checkoutSessionJson.id,
+        })
+
+        if (error) {
+            console.warn(error.message)
+        }
+    }
 
     return (
         <Box sx={{ backgroundColor: '#121212', color: '#f0f0f0', minHeight: '100vh' }}>
@@ -118,6 +137,7 @@ export default function Pricing() {
                                                 color: '#121212',
                                             },
                                         }}
+                                        onClick={handleSubmit} // Connect button to handleSubmit
                                     >
                                         Choose Plan
                                     </Button>
@@ -171,5 +191,5 @@ export default function Pricing() {
                 </Box>
             </Container>
         </Box>
-    )
+    );
 }
