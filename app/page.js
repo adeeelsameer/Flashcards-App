@@ -1,6 +1,6 @@
 'use client'
 import Image from "next/image";
-import { Container, Box, Typography, Button, Grid } from '@mui/material'
+import { Box, Typography, Button } from '@mui/material';
 import { styled } from '@mui/material/styles';
 import ResponsiveAppBar from "./components/Navbar";
 
@@ -32,8 +32,6 @@ export default function Home() {
         </Typography>
         <Box display="flex" flexDirection="column" gap="16px">
           <Box mt="30px" display="flex" flexDirection="row" gap="16px">
-
-
             <Button variant="outlined" sx={{
               borderColor: '#bb86fc',
               color: '#bb86fc',
@@ -49,7 +47,6 @@ export default function Home() {
               Learn More
             </Button>
           </Box>
-
           <Button variant="contained" sx={{
             backgroundColor: '#bb86fc',
             color: 'white',
@@ -57,9 +54,13 @@ export default function Home() {
           }} href="/generate">
             Get Started
           </Button>
-
         </Box>
       </Box>
-    </Box >
+      <Box sx={{ position: 'absolute', bottom: 0, width: '100%', py: 2, bgcolor: '#121212', textAlign: 'center' }}>
+        <Typography variant="body2" sx={{ color: '#f0f0f0', fontFamily: 'Arial, sans-serif' }}>
+          Made with ♡ by our team
+        </Typography>
+      </Box>
+    </Box>
   );
 }
