@@ -8,7 +8,7 @@ const FaqPage = () => {
         },
         {
             question: "What payment methods are accepted for upgrading to a premium account?",
-            answer: "We accept all major credit and debit cards through Stripe"
+            answer: "We accept all major credit and debit cards through Stripe."
         },
         {
             question: "Will I be automatically charged after my free trial ends?",
@@ -33,13 +33,13 @@ const FaqPage = () => {
     ];
 
     return (
-        <div>
-            <h1>Frequently Asked Questions</h1>
+        <div style={{ padding: '20px', maxWidth: '800px', margin: '0 auto', backgroundColor: '#000' }}>
+            <h1 style={{ textAlign: 'center', marginBottom: '30px', color: '#fff' }}>Frequently Asked Questions</h1>
             <div>
                 {faqs.map((faq, index) => (
-                    <div key={index}>
-                        <h3>{faq.question}</h3>
-                        <p>{faq.answer}</p>
+                    <div key={index} style={{ marginBottom: '20px', padding: '10px', borderBottom: '1px solid #333' }}>
+                        <h3 style={{ margin: '0 0 10px', color: '#eee' }}>{faq.question}</h3>
+                        <p style={{ margin: '0', color: '#ccc' }}>{faq.answer}</p>
                     </div>
                 ))}
             </div>
