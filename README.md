@@ -2,6 +2,9 @@
 
 Flashcards-App is a SaaS (Software as a Service) application designed to generate AI-powered flashcards. The app leverages cutting-edge technologies such as Next.js, Clerk, Firebase, OpenAI, and Stripe to provide a seamless user experience. This was created as a group project at Headstarter AI.
 
+# Join the Waitlist By Completing this form
+https://tally.so/r/w7oa2A
+
 ## Features
 
 - **AI Flashcard Generation:** Automatically create flashcards using OpenAI's language model.
