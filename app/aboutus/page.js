@@ -45,8 +45,8 @@ export default function AboutUs() {
   return (
     <Box>
       <ResponsiveAppBar />
-      <TeamSection>
-        <Heading variant="h4" component="h1" gutterBottom>
+      <TeamSection >
+        <Heading variant="h4" component="h1" gutterBottom mt="50px">
           Meet the Devs
         </Heading>
         <Grid container spacing={4} justifyContent="center">
