@@ -111,6 +111,7 @@ export default function Pricing() {
                                             color: '#121212',
                                         },
                                     }}
+                                    href='https://flashcards-n30o4jmog-rabia-ghafoors-projects.vercel.app/generate'
                                 >
                                     Get Started
                                 </Button>
