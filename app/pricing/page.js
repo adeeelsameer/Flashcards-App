@@ -163,7 +163,7 @@ export default function Pricing() {
                         <Grid item xs={12} md={4}>
                             <PlanCard>
                                 <CardContent>
-                                    <Typography variant="h5" component="div" gutterBottom>
+                                    <Typography variant="h5" component="div" gutterBottom >
                                         Gold Plan
                                     </Typography>
                                     <Typography variant="h6" sx={{ color: '#b0b0b0', mb: 2, textAlign: 'center' }}>
@@ -196,6 +196,7 @@ export default function Pricing() {
                                             color: '#121212',
                                         },
                                     }}
+                                    href="https://tally.so/r/w7oa2A"
                                 >
                                     Join Waitlist
                                 </Button>
