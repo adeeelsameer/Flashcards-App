@@ -88,7 +88,7 @@ function ResponsiveAppBar() {
                                         p: 1,
                                     }}
                                 >
-                                    <Typography sx={{ textAlign: "center", color: "#" }} >{page.name}</Typography>
+                                    <Button sx={{ textAlign: "center", color: "#f0f0f0" }} href={page.path}>{page.name}</Button>
                                 </MenuItem>
                             ))}
                         </Menu>

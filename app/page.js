@@ -9,13 +9,13 @@ export default function Home() {
     <Box width="100vw" height="100vh" sx={{ backgroundImage: 'linear-gradient(to right, #121212, #2c2c2c)', color: 'white', overflow: 'hidden' }}>
       <ResponsiveAppBar />
       <Box display={"flex"} flexDirection="column" justifyContent={"center"} alignItems={"center"} sx={{
-        textAlign: 'center', my: 4, pt: {
+        textAlign: 'center', pt: {
           xs: '56px', md: '64px'
         }, height: {
           xs: 'calc(100vh - 56px)',
           md: 'calc(100vh - 64px)',
         },
-      }} >
+      }}>
         <Typography variant="h2" component="h1" gutterBottom sx={{
           color: '#bb86fc',
           textShadow: '0 0 10px #3700b3, 0 0 20px #3700b3, 0 0 30px #3700b3, 0 0 40px #bb86fc',

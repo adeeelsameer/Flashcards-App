@@ -92,7 +92,7 @@ function ResponsiveNavBar() {
                                     key={page.name}
                                     onClick={handleCloseNavMenu}
                                     sx={{
-                                        color: '#f0f0f0', // Change the text color to match the theme
+                                        color: '#f0f0f0',
                                         bgcolor: '#1f1f1f', // Set background color to match the AppBar
                                         textShadow: '0 0 10px #bb86fc, 0 0 20px #3700b3', // Adjust the text shadow for visibility
                                         fontFamily: 'Arial, sans-serif',
@@ -102,7 +102,7 @@ function ResponsiveNavBar() {
                                         }
                                     }}
                                 >
-                                    <Typography sx={{ textAlign: "center", color: "#f0f0f0" }}>{page.name}</Typography>
+                                    <Button sx={{ textAlign: "center", color: "#f0f0f0" }} href={page.path}>{page.name}</Button>
                                 </MenuItem>
                             ))}
                         </Menu>

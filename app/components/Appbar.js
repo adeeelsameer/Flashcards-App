@@ -26,10 +26,10 @@ function ResponsiveAppBar() {
                     <Box m="3px" sx={{ display: { xs: 'none', md: 'flex' } }}>
                         <Link href="/">
                             <Image
-                                src="/images/logo.png" // Path to the image in the public folder
+                                src="/images/logo.png"
                                 alt="Logo"
-                                width={75} // Set your desired width
-                                height={75} // Set your desired height
+                                width={75}
+                                height={75}
                             />
                         </Link>
                     </Box>
@@ -88,7 +88,7 @@ function ResponsiveAppBar() {
                                         p: 1,
                                     }}
                                 >
-                                    <Typography sx={{ textAlign: "center", color: "#" }} >{page.name}</Typography>
+                                    <Button sx={{ textAlign: "center", color: "#f0f0f0" }} href={page.path}>{page.name}</Button>
                                 </MenuItem>
                             ))}
                         </Menu>
