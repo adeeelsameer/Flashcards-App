@@ -13,7 +13,8 @@ import {
 const pages = [
     { name: 'Pricing', path: '/pricing' },
     { name: 'FAQ', path: '/faq' },
-    { name: 'About Us', path: '/aboutus' }
+    { name: 'About Us', path: '/aboutus' },
+    { name: 'Join Waitlist', path: 'https://tally.so/r/w7oa2A', type: 'special' }
 ];
 
 function ResponsiveNavBar() {
@@ -115,12 +116,14 @@ function ResponsiveNavBar() {
                                 sx={{
                                     my: 1,
                                     mx: 3,
-                                    color: '#f0f0f0',
+                                    color: page.type === 'special' ? '#bb86fc' : '#f0f0f0',
                                     display: 'block',
                                     textAlign: "center",
                                     ":hover": { bgcolor: '#3700b3', color: 'white' }
                                 }}
                                 href={page.path}
+                                target={page.type === 'special' ? '_blank' : '_self'}
+                                rel={page.type === 'special' ? 'noopener noreferrer' : undefined}
                             >
                                 {page.name}
                             </Button>
