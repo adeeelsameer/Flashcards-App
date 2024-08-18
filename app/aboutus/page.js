@@ -52,28 +52,28 @@ export default function AboutUs() {
         <Grid container spacing={4} justifyContent="center">
           <Grid item xs={12} sm={6} md={3}>
             <TeamMember>
-              <StyledAvatar src="public\images\Adil_Sameer.jpg" alt="Adil Sameer" />
+              <StyledAvatar src="/images/Adil_Sameer.jpg" alt="Adil Sameer" />
               <Typography variant="h6">Adil Sameer</Typography>
               <Typography variant="body1">Computer Science @ University of British Columbia | Front-End Developer | UI Design Enthusiast</Typography>
             </TeamMember>
           </Grid>
           <Grid item xs={12} sm={6} md={3}>
             <TeamMember>
-              <StyledAvatar src="public\images\Bhavana_Gupta.jpg" alt="Bhavana Gupta" />
+              <StyledAvatar src="/images/Bhavana_Gupta.jpg" alt="Bhavana Gupta" />
               <Typography variant="h6">Bhavana Gupta</Typography>
               <Typography variant="body1">Data Science @ IIT Madras | CS @ SAU | Python, ML, and Web Developer | Top Programming Voice</Typography>
             </TeamMember>
           </Grid>
           <Grid item xs={12} sm={6} md={3}>
             <TeamMember>
-              <StyledAvatar src="public\images\Rabia_Ghafoor.jpeg" alt="Rabia Ghafoor" />
+              <StyledAvatar src="/images/Rabia_Ghafoor.jpeg" alt="Rabia Ghafoor" />
               <Typography variant="h6">Rabia Ghafoor</Typography>
               <Typography variant="body1">Computer Science @ IU Bloomington | President @ INgineering at IU</Typography>
             </TeamMember>
           </Grid>
           <Grid item xs={12} sm={6} md={3}>
             <TeamMember>
-              <StyledAvatar src="public\images\Vivek_Vardhan_Kalyanapu.png" alt="Vivek Vardhan" />
+              <StyledAvatar src="/images/Vivek_Vardhan_Kalyanapu.png" alt="Vivek Vardhan" />
               <Typography variant="h6">Vivek Vardhan Kalyanapu</Typography>
               <Typography variant="body1">Master’s in CS @ University of Alabama at Birmingham | ECE @ GITAM | Full Stack | React, Node.js, AWS</Typography>
             </TeamMember>
