@@ -26,6 +26,11 @@ const HeartButton = styled('button')({
 });
 
 export default function Home() {
+  const openWaitlist = () => {
+    // Open the Tally form in a new tab
+    window.open('https://tally.so/r/w7oa2A', '_blank');
+  };
+
   return (
     <Box width="100vw" height="100vh" sx={{ backgroundImage: 'linear-gradient(to right, #121212, #2c2c2c)', color: 'white', overflow: 'hidden' }}>
       <ResponsiveAppBar />
@@ -64,8 +69,8 @@ export default function Home() {
               borderColor: '#bb86fc',
               color: '#bb86fc',
               "&:hover": { backgroundColor: '#3700b3', color: 'white', borderColor: '#3700b3' },
-            }} href="/faq">
-              Learn More
+            }} onClick={openWaitlist}>
+              Join Waitlist
             </Button>
           </Box>
           <Button variant="contained" sx={{
