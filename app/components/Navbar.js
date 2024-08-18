@@ -94,12 +94,12 @@ function ResponsiveNavBar() {
                                     onClick={handleCloseNavMenu}
                                     sx={{
                                         color: '#f0f0f0',
-                                        bgcolor: '#1f1f1f', // Set background color to match the AppBar
-                                        textShadow: '0 0 10px #bb86fc, 0 0 20px #3700b3', // Adjust the text shadow for visibility
+                                        bgcolor: '#1f1f1f',
+                                        textShadow: '0 0 10px #bb86fc, 0 0 20px #3700b3',
                                         fontFamily: 'Arial, sans-serif',
                                         ":hover": {
-                                            bgcolor: '#3700b3', // Change background color on hover
-                                            color: '#ffffff' // Ensure text is visible on hover
+                                            bgcolor: '#3700b3',
+                                            color: '#ffffff'
                                         }
                                     }}
                                 >

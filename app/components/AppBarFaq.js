@@ -13,7 +13,8 @@ import {
 const pages = [
     { name: 'Home', path: '/' },
     { name: 'Pricing', path: '/pricing' },
-    { name: 'About Us', path: '/aboutus' }
+    { name: 'About Us', path: '/aboutus' },
+    { name: 'Join Waitlist', path: 'https://tally.so/r/w7oa2A', type: 'special' }
 ];
 
 function ResponsiveNavBarFaq() {
@@ -42,10 +43,10 @@ function ResponsiveNavBarFaq() {
                     <Box m="3px" sx={{ display: { xs: 'none', md: 'flex' } }}>
                         <Link href="/">
                             <Image
-                                src="/images/logo.png" // Path to the image in the public folder
+                                src="/images/logo.png"
                                 alt="Logo"
-                                width={75} // Set your desired width
-                                height={75} // Set your desired height
+                                width={75}
+                                height={75}
                             />
                         </Link>
                     </Box>
@@ -100,7 +101,9 @@ function ResponsiveNavBarFaq() {
                                             bgcolor: '#3700b3',
                                             color: '#ffffff'
                                         }
+
                                     }}
+
                                 >
                                     <Button sx={{ textAlign: "center", color: "#f0f0f0" }} href={page.path}>{page.name}</Button>
                                 </MenuItem>
@@ -115,12 +118,15 @@ function ResponsiveNavBarFaq() {
                                 sx={{
                                     my: 1,
                                     mx: 3,
-                                    color: '#f0f0f0',
+                                    color: page.type === 'special' ? '#bb86fc' : '#f0f0f0',
                                     display: 'block',
                                     textAlign: "center",
                                     ":hover": { bgcolor: '#3700b3', color: 'white' }
                                 }}
                                 href={page.path}
+                                target={page.type === 'special' ? '_blank' : '_self'}
+                                rel={page.type === 'special' ? 'noopener noreferrer' : undefined}
+
                             >
                                 {page.name}
                             </Button>
