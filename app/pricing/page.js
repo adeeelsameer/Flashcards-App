@@ -124,7 +124,7 @@ export default function Pricing() {
                                         Silver Plan
                                     </Typography>
                                     <Typography variant="h6" sx={{ color: '#b0b0b0', mb: 2, textAlign: 'center' }}>
-                                        $5/month
+                                        $10/month
                                     </Typography>
                                     <Typography variant="body1" gutterBottom>
                                         100 flashcards
