@@ -1,9 +1,9 @@
 'use client'
-import { Box, Typography, Grid, Avatar } from '@mui/material';
+import { Box, Typography, Grid, Avatar, Fab } from '@mui/material';
 import { styled } from '@mui/material/styles';
+import LinkedInIcon from '@mui/icons-material/LinkedIn';
 import ResponsiveAppBar from '../components/AppbarAboutUs';
 
-// Style for the section
 const TeamSection = styled(Box)(({ theme }) => ({
   backgroundColor: '#121212',
   color: 'white',
@@ -16,7 +16,6 @@ const TeamSection = styled(Box)(({ theme }) => ({
   textAlign: 'center',
 }));
 
-// Style for individual team member
 const TeamMember = styled(Box)(({ theme }) => ({
   display: 'flex',
   flexDirection: 'column',
@@ -24,14 +23,12 @@ const TeamMember = styled(Box)(({ theme }) => ({
   margin: '20px',
 }));
 
-// Team member headshot style
 const StyledAvatar = styled(Avatar)(({ theme }) => ({
   width: '120px',
   height: '120px',
   marginBottom: '10px',
 }));
 
-// Style for the heading
 const Heading = styled(Typography)(({ theme }) => ({
   fontSize: '2.5rem',
   fontWeight: 'bold',
@@ -41,12 +38,21 @@ const Heading = styled(Typography)(({ theme }) => ({
   marginBottom: theme.spacing(4),
 }));
 
+const StyledFab = styled(Fab)(({ theme }) => ({
+  margin: '5px',
+  backgroundColor: '#3700b3',
+  color: '#f0f0f0',
+  '&:hover': {
+    backgroundColor: '#bb86fc',
+  },
+}));
+
 export default function AboutUs() {
   return (
     <Box>
       <ResponsiveAppBar />
-      <TeamSection >
-        <Heading variant="h4" component="h1" gutterBottom mt="50px">
+      <TeamSection>
+        <Heading variant="h4" component="h1" gutterBottom>
           Meet the Devs
         </Heading>
         <Grid container spacing={4} justifyContent="center">
@@ -55,6 +61,11 @@ export default function AboutUs() {
               <StyledAvatar src="/images/Adil_Sameer.jpg" alt="Adil Sameer" />
               <Typography variant="h6">Adil Sameer</Typography>
               <Typography variant="body1">Computer Science @ University of British Columbia | Front-End Developer | UI Design Enthusiast</Typography>
+              <Box mt={2}>
+                <StyledFab size="small" href="https://www.linkedin.com/in/muhammad-adil-sameer/" target="_blank">
+                  <LinkedInIcon />
+                </StyledFab>
+              </Box>
             </TeamMember>
           </Grid>
           <Grid item xs={12} sm={6} md={3}>
@@ -62,13 +73,23 @@ export default function AboutUs() {
               <StyledAvatar src="/images/Bhavana_Gupta.jpg" alt="Bhavana Gupta" />
               <Typography variant="h6">Bhavana Gupta</Typography>
               <Typography variant="body1">Data Science @ IIT Madras | CS @ SAU | Python, ML, and Web Developer | Top Programming Voice</Typography>
+              <Box mt={2}>
+                <StyledFab size="small" href="https://www.linkedin.com/in/bhavanagupta1st/" target="_blank">
+                  <LinkedInIcon />
+                </StyledFab>
+              </Box>
             </TeamMember>
           </Grid>
           <Grid item xs={12} sm={6} md={3}>
             <TeamMember>
               <StyledAvatar src="/images/Rabia_Ghafoor.jpeg" alt="Rabia Ghafoor" />
               <Typography variant="h6">Rabia Ghafoor</Typography>
-              <Typography variant="body1">Computer Science @ IU Bloomington | President @ INgineering at IU</Typography>
+              <Typography variant="body1">Computer Science @ IU Bloomington | President @ INgineering at IU | Interested in SWE and Product Management</Typography>
+              <Box mt={2}>
+                <StyledFab size="small" href="https://www.linkedin.com/in/rabiaaghafoor/" target="_blank">
+                  <LinkedInIcon />
+                </StyledFab>
+              </Box>
             </TeamMember>
           </Grid>
           <Grid item xs={12} sm={6} md={3}>
@@ -76,6 +97,12 @@ export default function AboutUs() {
               <StyledAvatar src="/images/Vivek_Vardhan_Kalyanapu.png" alt="Vivek Vardhan" />
               <Typography variant="h6">Vivek Vardhan Kalyanapu</Typography>
               <Typography variant="body1">Master’s in CS @ University of Alabama at Birmingham | ECE @ GITAM | Full Stack | React, Node.js, AWS</Typography>
+              <Box mt={2}>
+                <StyledFab size="small" href="https://www.linkedin.com/in/vivekvardhank/" target="_blank">
+                  <LinkedInIcon />
+                </StyledFab>
+
+              </Box>
             </TeamMember>
           </Grid>
         </Grid>
