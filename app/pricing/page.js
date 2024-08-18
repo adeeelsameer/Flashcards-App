@@ -112,7 +112,7 @@ export default function Pricing() {
                                         },
                                     }}
                                 >
-                                    Free Plan
+                                    Get Started
                                 </Button>
                             </PlanCard>
                         </Grid>
