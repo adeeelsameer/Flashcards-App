@@ -6,7 +6,7 @@ import { Box, Typography, AppBar, Toolbar, Button, IconButton, Menu, Container, 
 import MenuIcon from '@mui/icons-material/Menu';
 import { SignedIn, SignedOut, UserButton } from '@clerk/nextjs';
 
-const pages = [{ name: 'Home', path: '/' }, { name: 'Pricing', path: '/pricing' }, { name: 'FAQ', path: '/faq' },
+const pages = [{ name: 'Home', path: '/' }, { name: 'FAQ', path: '/faq' }, { name: 'About Us', path: '/aboutus' },
 { name: 'Join Waitlist', path: 'https://tally.so/r/w7oa2A', type: 'special' }
 ];
 
@@ -111,7 +111,6 @@ function ResponsiveAppBar() {
                                 href={page.path}
                                 target={page.type === 'special' ? '_blank' : '_self'}
                                 rel={page.type === 'special' ? 'noopener noreferrer' : undefined}
-
                             >
                                 {page.name}
                             </Button>

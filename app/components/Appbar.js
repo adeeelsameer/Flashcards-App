@@ -6,7 +6,8 @@ import { Box, Typography, AppBar, Toolbar, Button, IconButton, Menu, Container, 
 import MenuIcon from '@mui/icons-material/Menu';
 import { SignedIn, SignedOut, UserButton } from '@clerk/nextjs';
 
-const pages = [{ name: 'Home', path: '/' }, { name: 'FAQ', path: '/faq' }, { name: 'About Us', path: '/aboutus' },];
+const pages = [{ name: 'Home', path: '/' }, { name: 'FAQ', path: '/faq' }, { name: 'About Us', path: '/aboutus' },
+];
 
 function ResponsiveAppBar() {
     const [anchorElNav, setAnchorElNav] = React.useState(null);
@@ -101,12 +102,14 @@ function ResponsiveAppBar() {
                                 sx={{
                                     my: 1,
                                     mx: 3,
-                                    color: '#f0f0f0',
+                                    color: page.type === 'special' ? '#bb86fc' : '#f0f0f0',
                                     display: 'block',
                                     textAlign: "center",
                                     ":hover": { bgcolor: '#3700b3', color: 'white' }
                                 }}
                                 href={page.path}
+                                target={page.type === 'special' ? '_blank' : '_self'}
+                                rel={page.type === 'special' ? 'noopener noreferrer' : undefined}
                             >
                                 {page.name}
                             </Button>

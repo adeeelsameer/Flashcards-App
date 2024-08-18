@@ -2,7 +2,7 @@
 
 import { Button, Typography, Grid, Card, CardContent, Box, Container } from '@mui/material';
 import { styled } from '@mui/material/styles';
-import ResponsiveAppBar from '../components/Appbar';
+import ResponsiveAppBar from '../components/AppbarPricing';
 import getStripe from '@/utils/get-stripe.js'; // Import getStripe utility
 
 export default function Pricing() {
