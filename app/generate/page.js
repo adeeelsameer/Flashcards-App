@@ -83,8 +83,16 @@ export default function Generate() {
       setFlashcards(data);
       setText('');
       setCreateDialogOpen(false);
+
       setTimeout(() => {
-        flashcardsRef.current.scrollIntoView({ behavior: 'smooth' });
+        const offset = 100;
+        const elementPosition = flashcardsRef.current.getBoundingClientRect().top;
+        const offsetPosition = elementPosition + window.pageYOffset - offset;
+
+        window.scrollTo({
+          top: offsetPosition,
+          behavior: 'smooth'
+        });
       }, 100);
     } catch (error) {
       console.error('Error generating flashcards:', error);
@@ -93,6 +101,7 @@ export default function Generate() {
       setLoading(false);
     }
   };
+
 
   const handleCardClick = (id) => {
     setFlipped((prev) => ({
