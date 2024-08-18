@@ -12,11 +12,14 @@ export const metadata = {
 export default function RootLayout({ children }) {
   return (
     <ClerkProvider>
-    <html lang="en">
-      <body className={inter.className}>
+      <html lang="en">
+        <head>
+          <script async src="https://tally.so/widgets/embed.js"></script>
+        </head>
+        <body className={inter.className}>
           {children} 
         </body>
-    </html>
+      </html>
     </ClerkProvider>
   );
 }
