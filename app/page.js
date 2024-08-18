@@ -4,6 +4,27 @@ import { Box, Typography, Button } from '@mui/material';
 import { styled } from '@mui/material/styles';
 import ResponsiveAppBar from "./components/Navbar";
 
+const HeartButton = styled('button')({
+  position: 'fixed',
+  bottom: 20,
+  right: 20,
+  backgroundColor: '#ff4081',
+  color: 'white',
+  border: 'none',
+  borderRadius: '50%',
+  width: 50,
+  height: 50,
+  display: 'flex',
+  alignItems: 'center',
+  justifyContent: 'center',
+  fontSize: '24px',
+  cursor: 'pointer',
+  boxShadow: '0px 4px 8px rgba(0, 0, 0, 0.2)',
+  '&:hover': {
+    backgroundColor: '#f50057',
+  },
+});
+
 export default function Home() {
   return (
     <Box width="100vw" height="100vh" sx={{ backgroundImage: 'linear-gradient(to right, #121212, #2c2c2c)', color: 'white', overflow: 'hidden' }}>
@@ -61,6 +82,14 @@ export default function Home() {
           Made with ♡ by our team
         </Typography>
       </Box>
+      <HeartButton
+        data-tally-open="w7oa2A"
+        data-tally-emoji-text="👋"
+        data-tally-emoji-animation="wave"
+        aria-label="Open Waitlist"
+      >
+        ❤️
+      </HeartButton>
     </Box>
   );
 }
