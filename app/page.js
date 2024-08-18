@@ -8,7 +8,7 @@ const HeartButton = styled('button')({
   position: 'fixed',
   bottom: 20,
   right: 20,
-  backgroundColor: '#ff4081',
+  backgroundColor: '#bb86fc',
   color: 'white',
   border: 'none',
   borderRadius: '50%',
@@ -21,7 +21,7 @@ const HeartButton = styled('button')({
   cursor: 'pointer',
   boxShadow: '0px 4px 8px rgba(0, 0, 0, 0.2)',
   '&:hover': {
-    backgroundColor: '#f50057',
+    backgroundColor: '#3700b3',
   },
 });
 
