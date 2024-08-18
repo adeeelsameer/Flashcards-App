@@ -196,6 +196,7 @@ export default function Pricing() {
                                             color: '#121212',
                                         },
                                     }}
+                                    href="https://tally.so/r/w7oa2A"
                                 >
                                     Join Waitlist
                                 </Button>
