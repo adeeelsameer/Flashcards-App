@@ -112,7 +112,7 @@ export default function Pricing() {
                                         },
                                     }}
                                 >
-                                    Choose Plan
+                                    Free Plan
                                 </Button>
                             </PlanCard>
                         </Grid>
@@ -124,7 +124,7 @@ export default function Pricing() {
                                         Silver Plan
                                     </Typography>
                                     <Typography variant="h6" sx={{ color: '#b0b0b0', mb: 2, textAlign: 'center' }}>
-                                        $10/month
+                                        $10/year
                                     </Typography>
                                     <Typography variant="body1" gutterBottom>
                                         100 flashcards
@@ -167,7 +167,7 @@ export default function Pricing() {
                                         Gold Plan
                                     </Typography>
                                     <Typography variant="h6" sx={{ color: '#b0b0b0', mb: 2, textAlign: 'center' }}>
-                                        $20/month
+                                        $20/year
                                     </Typography>
                                     <Typography variant="body1" gutterBottom>
                                         Unlimited flashcards
