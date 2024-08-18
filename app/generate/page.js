@@ -289,10 +289,10 @@ export default function Generate() {
       </Fab>
 
       <Dialog open={createDialogOpen} onClose={handleCloseCreateDialog} PaperProps={{ sx: { backgroundColor: '#1f1f1f', color: '#f0f0f0' } }}>
-        <DialogTitle sx={{ color: '#bb86fc' }}>Enter Text to Generate Flashcards</DialogTitle>
+        <DialogTitle sx={{ color: '#bb86fc' }}>Generate Flashcards</DialogTitle>
         <DialogContent>
           <DialogContentText sx={{ color: '#b0b0b0' }}>
-            Please enter the text below to generate your flashcards.
+            Enter your flashcard topic. Be as detailed as you'd like.
           </DialogContentText>
           <TextField
             autoFocus

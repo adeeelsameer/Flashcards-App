@@ -21,7 +21,7 @@ export default function Home() {
           textShadow: '0 0 10px #3700b3, 0 0 20px #3700b3, 0 0 30px #3700b3, 0 0 40px #bb86fc',
           fontFamily: 'Arial, sans-serif',
         }}>
-          <b>Welcome to FLASHIFY</b>
+          <b>Welcome to FLASHIFY.AI</b>
         </Typography>
         <Typography variant="h5" component="h2" gutterBottom sx={{
           color: '#f0f0f0',
