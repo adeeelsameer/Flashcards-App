@@ -28,7 +28,7 @@ export default function SignInPage() {
         }}
       >
         <Typography variant="h4" component="h1" gutterBottom sx={{ color: '#f0f0f0' }}>
-          Sign In
+          Login
         </Typography>
         <Box sx={{ width: '100%', maxWidth: '400px', mt: 1 }}>
           <SignIn path="/sign-in" routing="path" signUpUrl="/sign-up" />
