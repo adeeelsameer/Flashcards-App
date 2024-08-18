@@ -9,11 +9,14 @@ export default function Pricing() {
     const PlanCard = styled(Card)(({ theme }) => ({
         backgroundColor: '#1f1f1f',
         color: '#bb86fc',
-        borderRadius: '10px',
-        padding: '20px',
+        borderRadius: '15px',
+        padding: '30px',
         textAlign: 'center',
-        minHeight: '400px',
+        minHeight: '500px', // Increased height for larger boxes
         boxShadow: '0 4px 20px rgba(0, 0, 0, 0.3)',
+        display: 'flex',
+        flexDirection: 'column',
+        justifyContent: 'space-between',
         transition: 'transform 0.3s, background-color 0.3s',
         '&:hover': {
             transform: 'scale(1.05)',
@@ -22,11 +25,11 @@ export default function Pricing() {
     }));
 
     const PlanContainer = styled(Grid)(({ theme }) => ({
-        marginTop: '40px',
+        marginTop: '20px',
         justifyContent: 'center',
+        alignItems: 'stretch',
     }));
 
-    // Handle Stripe checkout session creation and redirection
     const handleSubmit = async () => {
         try {
             const checkoutSession = await fetch('/api/checkout_sessions', {
@@ -35,7 +38,7 @@ export default function Pricing() {
                     'Content-Type': 'application/json',
                 },
                 body: JSON.stringify({
-                    priceId: 'price_1Poo9HLzH1ehy79qtV3ugR07', // Silver Plan Price ID
+                    priceId: 'price_1Poo9HLzH1ehy79qtV3ugR07',
                 }),
             });
 
@@ -67,7 +70,7 @@ export default function Pricing() {
                     <Typography variant="h4" component="h2" gutterBottom>
                         Pricing
                     </Typography>
-                    <Typography variant="body1" sx={{ mb: 4, color: '#b0b0b0' }}>
+                    <Typography variant="body1" sx={{ mb: 2, color: '#b0b0b0' }}>
                         Choose the plan that best suits your needs. Each plan comes with its own set of features to help you maximize your learning.
                     </Typography>
 
@@ -78,33 +81,39 @@ export default function Pricing() {
                                     <Typography variant="h5" component="div" gutterBottom>
                                         Bronze Plan
                                     </Typography>
-                                    <Typography variant="h6" sx={{ color: '#b0b0b0' }}>
+                                    <Typography variant="h6" sx={{ color: '#b0b0b0', mb: 2, textAlign: 'center' }}>
                                         FREE
                                     </Typography>
                                     <Typography variant="body1" gutterBottom>
-                                        Access to 50 flashcards
+                                        50 flashcards
                                     </Typography>
                                     <Typography variant="body1" gutterBottom>
-                                        Limited daily tests (5 tests/day)
+                                        5 tests/day
                                     </Typography>
                                     <Typography variant="body1" gutterBottom>
-                                        Custom flashcard creation
+                                        Custom flashcards
                                     </Typography>
-                                    <Button
-                                        variant="contained"
-                                        sx={{
-                                            marginTop: '20px',
-                                            backgroundColor: '#bb86fc',
-                                            color: '#121212',
-                                            '&:hover': {
-                                                backgroundColor: '#f0f0f0',
-                                                color: '#121212',
-                                            },
-                                        }}
-                                    >
-                                        Choose Plan
-                                    </Button>
+                                    <Typography variant="body1" gutterBottom>
+                                        Basic progress tracking
+                                    </Typography>
+                                    <Typography variant="body1" gutterBottom>
+                                        Community support
+                                    </Typography>
                                 </CardContent>
+                                <Button
+                                    variant="contained"
+                                    sx={{
+                                        marginTop: 'auto',
+                                        backgroundColor: '#bb86fc',
+                                        color: '#121212',
+                                        '&:hover': {
+                                            backgroundColor: '#f0f0f0',
+                                            color: '#121212',
+                                        },
+                                    }}
+                                >
+                                    Choose Plan
+                                </Button>
                             </PlanCard>
                         </Grid>
 
@@ -114,34 +123,40 @@ export default function Pricing() {
                                     <Typography variant="h5" component="div" gutterBottom>
                                         Silver Plan
                                     </Typography>
-                                    <Typography variant="h6" sx={{ color: '#b0b0b0' }}>
+                                    <Typography variant="h6" sx={{ color: '#b0b0b0', mb: 2, textAlign: 'center' }}>
                                         $5/month
                                     </Typography>
                                     <Typography variant="body1" gutterBottom>
-                                        Access to 100 flashcards
+                                        100 flashcards
                                     </Typography>
                                     <Typography variant="body1" gutterBottom>
-                                        Enhanced review mode with spaced repetition
+                                        Spaced repetition
                                     </Typography>
                                     <Typography variant="body1" gutterBottom>
-                                        Custom flashcard creation
+                                        Custom flashcards with images
                                     </Typography>
-                                    <Button
-                                        variant="contained"
-                                        sx={{
-                                            marginTop: '20px',
-                                            backgroundColor: '#bb86fc',
-                                            color: '#121212',
-                                            '&:hover': {
-                                                backgroundColor: '#f0f0f0',
-                                                color: '#121212',
-                                            },
-                                        }}
-                                        onClick={handleSubmit} // Connect button to handleSubmit
-                                    >
-                                        Choose Plan
-                                    </Button>
+                                    <Typography variant="body1" gutterBottom>
+                                        Enhanced progress tracking
+                                    </Typography>
+                                    <Typography variant="body1" gutterBottom>
+                                        Email support
+                                    </Typography>
                                 </CardContent>
+                                <Button
+                                    variant="contained"
+                                    sx={{
+                                        marginTop: 'auto',
+                                        backgroundColor: '#bb86fc',
+                                        color: '#121212',
+                                        '&:hover': {
+                                            backgroundColor: '#f0f0f0',
+                                            color: '#121212',
+                                        },
+                                    }}
+                                    onClick={handleSubmit}
+                                >
+                                    Choose Plan
+                                </Button>
                             </PlanCard>
                         </Grid>
 
@@ -149,41 +164,41 @@ export default function Pricing() {
                             <PlanCard>
                                 <CardContent>
                                     <Typography variant="h5" component="div" gutterBottom>
-                                        Gold Plan [Join Waitlist to Access]
+                                        Gold Plan
                                     </Typography>
-                                    <Typography variant="h6" sx={{ color: '#b0b0b0' }}>
+                                    <Typography variant="h6" sx={{ color: '#b0b0b0', mb: 2, textAlign: 'center' }}>
                                         $20/month
                                     </Typography>
                                     <Typography variant="body1" gutterBottom>
-                                        Access to unlimited flashcards
+                                        Unlimited flashcards
                                     </Typography>
                                     <Typography variant="body1" gutterBottom>
-                                        Enhanced review mode with spaced repetition and AI recommendations
+                                        AI recommendations
                                     </Typography>
                                     <Typography variant="body1" gutterBottom>
-                                        Unlimited daily tests with adaptive difficulty
+                                        Advanced progress tracking
                                     </Typography>
                                     <Typography variant="body1" gutterBottom>
-                                        Comprehensive statistics and progress tracking
+                                        Custom flashcards with images and audio
                                     </Typography>
                                     <Typography variant="body1" gutterBottom>
-                                        Custom flashcard creation with images
+                                        Priority support
                                     </Typography>
-                                    <Button
-                                        variant="contained"
-                                        sx={{
-                                            marginTop: '20px',
-                                            backgroundColor: '#bb86fc',
-                                            color: '#121212',
-                                            '&:hover': {
-                                                backgroundColor: '#f0f0f0',
-                                                color: '#121212',
-                                            },
-                                        }}
-                                    >
-                                        Join Waitlist
-                                    </Button>
                                 </CardContent>
+                                <Button
+                                    variant="contained"
+                                    sx={{
+                                        marginTop: 'auto',
+                                        backgroundColor: '#bb86fc',
+                                        color: '#121212',
+                                        '&:hover': {
+                                            backgroundColor: '#f0f0f0',
+                                            color: '#121212',
+                                        },
+                                    }}
+                                >
+                                    Join Waitlist
+                                </Button>
                             </PlanCard>
                         </Grid>
                     </PlanContainer>
