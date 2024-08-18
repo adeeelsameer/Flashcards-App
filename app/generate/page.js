@@ -35,6 +35,8 @@ export default function Generate() {
   const [flashcardSets, setFlashcardSets] = useState([]);
   const [flipped, setFlipped] = useState([]);
   const flashcardsRef = useRef(null);
+  const [addDisabled, setAddDisabled] = useState(true);
+  const [upgradeMessage, setUpgradeMessage] = useState('');
 
   useEffect(() => {
     const fetchFlashcardSets = async () => {
@@ -47,6 +49,28 @@ export default function Generate() {
 
         const sets = querySnapshot.docs.map(doc => doc.id);
         setFlashcardSets(sets);
+        //const userData = userDoc.data();
+        const plan = 'bronze'; 
+        
+        const existingFlashcardsCount = sets.length;
+        console.log(sets)
+        console.log(existingFlashcardsCount);
+
+        let maxFlashcards=Infinity;
+        if(plan.toLowerCase() ==='bronze'){
+          maxFlashcards=5;
+        }else if(plan.toLowerCase() ==='gold'){
+          maxFlashcards=10;
+        }
+        console.log(maxFlashcards)
+
+      if (existingFlashcardsCount >= maxFlashcards) {
+        setAddDisabled(true); 
+        setUpgradeMessage(`Upgrade to ADD more.`);
+      }else{
+        setAddDisabled(false);
+        setUpgradeMessage('');
+      }
       } catch (error) {
         console.error('Error fetching flashcard sets:', error);
       }
@@ -182,9 +206,32 @@ export default function Generate() {
             }}
             href="/flashcards"
           >
-            View Saved Flashcards
+            View Saved Flashcard Sets
           </Button>
         </Box>)}
+
+        {upgradeMessage && <Box>
+      <Typography variant="h6" sx={{ color: '#b0b0b0', textAlign: 'center', my: 2 }}>
+        {upgradeMessage}
+      </Typography>
+      <Button sx={{
+        backgroundColor: '#bb86fc',
+        color: 'white',
+        px: 3,
+        py: 1,
+        borderRadius: '20px',
+        boxShadow: '0 4px 10px rgba(0, 0, 0, 0.3)',
+        transition: 'background-color 0.3s, transform 0.3s',
+        '&:hover': {
+          backgroundColor: '#3700b3',
+          transform: 'scale(1.05)',
+        },
+      }} 
+      href='/pricing'>
+        upgrade
+      </Button>
+      </Box>
+    }
       </Box>
 
       {flashcards.length > 0 && (
@@ -282,7 +329,7 @@ export default function Generate() {
         </Box>
       )}
 
-      <Fab color="primary" aria-label="add" onClick={handleOpenCreateDialog} sx={{
+      <Fab color="primary" aria-label="add" onClick={handleOpenCreateDialog} disabled={addDisabled} sx={{
         position: 'fixed',
         bottom: 16,
         right: 16,
