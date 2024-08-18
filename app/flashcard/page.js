@@ -4,6 +4,7 @@ import { useState, useEffect } from 'react';
 import { useUser } from '@clerk/nextjs';
 import { useSearchParams } from 'next/navigation';
 import { db } from '@/firebase';
+import ResponsiveAppBar from '../components/Appbar';
 import {
   Container,
   CardActionArea,
@@ -11,8 +12,6 @@ import {
   Grid,
   Card,
   CardContent,
-  AppBar,
-  Toolbar,
   Box,
 } from '@mui/material';
 import { collection, getDocs, doc, getDoc } from 'firebase/firestore';
@@ -70,22 +69,16 @@ export default function Flashcard() {
   };
 
   return (
-    <Box sx={{ backgroundImage: 'linear-gradient(to right, #121212, #2c2c2c)', color: 'white', minHeight: '100vh' }}>
-      <AppBar position="static" sx={{ backgroundColor: '#1f1f1f', boxShadow: '0 4px 20px rgba(0, 0, 0, 0.3)' }}>
-        <Toolbar>
-          <Typography variant="h6" sx={{ flexGrow: 1, color: '#f0f0f0' }}>
-            Flashcard Sets
-          </Typography>
-        </Toolbar>
-      </AppBar>
+    <Box sx={{ backgroundImage: 'linear-gradient(to right, #121212, #2c2c2c)', color: 'white', minHeight: '100vh', display: 'flex', flexDirection: 'column' }}>
+      <ResponsiveAppBar />
 
-      <Container maxWidth="md" sx={{ pt: '80px' }}>
+      <Container maxWidth="md" sx={{ flexGrow: 1, pt: '80px' }}>
         {selectedSet ? (
           <Box sx={{ mt: 4 }}>
             <Typography variant="h4" gutterBottom sx={{ textAlign: 'center', color: '#f0f0f0' }}>
               {selectedSet.name}
             </Typography>
-            <Grid container spacing={3}>
+            <Grid container spacing={3} mb='100px'>
               {flashcards.length > 0 ? (
                 flashcards.map((flashcard, index) => (
                   <Grid item xs={12} sm={6} md={4} key={index}>
@@ -94,7 +87,8 @@ export default function Flashcard() {
                       boxShadow: '0 4px 20px rgba(0, 0, 0, 0.3)', transition: 'transform 0.3s',
                       '&:hover': {
                         transform: 'scale(1.05)',
-                      }
+                      },
+
                     }}>
                       <CardActionArea onClick={() => handleCardClick(index)}>
                         <CardContent>
