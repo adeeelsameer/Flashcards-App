@@ -118,6 +118,7 @@ export default function Generate() {
           behavior: 'smooth'
         });
       }, 100);
+      setFlipped([]);
     } catch (error) {
       console.error('Error generating flashcards:', error);
       alert('An error occurred while generating flashcards. Please try again.');
