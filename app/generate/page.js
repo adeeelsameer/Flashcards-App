@@ -50,27 +50,27 @@ export default function Generate() {
         const sets = querySnapshot.docs.map(doc => doc.id);
         setFlashcardSets(sets);
         //const userData = userDoc.data();
-        const plan = 'bronze'; 
-        
+        const plan = 'bronze';
+
         const existingFlashcardsCount = sets.length;
         console.log(sets)
         console.log(existingFlashcardsCount);
 
-        let maxFlashcards=Infinity;
-        if(plan.toLowerCase() ==='bronze'){
-          maxFlashcards=5;
-        }else if(plan.toLowerCase() ==='gold'){
-          maxFlashcards=10;
+        let maxFlashcards = Infinity;
+        if (plan.toLowerCase() === 'bronze') {
+          maxFlashcards = 5;
+        } else if (plan.toLowerCase() === 'gold') {
+          maxFlashcards = 10;
         }
         console.log(maxFlashcards)
 
-      if (existingFlashcardsCount >= maxFlashcards) {
-        setAddDisabled(true); 
-        setUpgradeMessage(`Upgrade to ADD more.`);
-      }else{
-        setAddDisabled(false);
-        setUpgradeMessage('');
-      }
+        if (existingFlashcardsCount >= maxFlashcards) {
+          setAddDisabled(true);
+          setUpgradeMessage(`Upgrade to ADD more.`);
+        } else {
+          setAddDisabled(false);
+          setUpgradeMessage('');
+        }
       } catch (error) {
         console.error('Error fetching flashcard sets:', error);
       }
@@ -184,7 +184,8 @@ export default function Generate() {
         </Typography>
 
         <Typography variant="h6" sx={{ color: '#b0b0b0', mb: 2 }}>
-          Use the + button to create a new flashcard.
+          Use the + button on the bottom right to create a new flashcard. <br />
+          The AI will generate the flahscards for you!
         </Typography>
 
         {flashcardSets.length > 0 && (<Box sx={{ display: 'flex', gap: 2, mt: 2 }}>
@@ -211,123 +212,125 @@ export default function Generate() {
         </Box>)}
 
         {upgradeMessage && <Box>
-      <Typography variant="h6" sx={{ color: '#b0b0b0', textAlign: 'center', my: 2 }}>
-        {upgradeMessage}
-      </Typography>
-      <Button sx={{
-        backgroundColor: '#bb86fc',
-        color: 'white',
-        px: 3,
-        py: 1,
-        borderRadius: '20px',
-        boxShadow: '0 4px 10px rgba(0, 0, 0, 0.3)',
-        transition: 'background-color 0.3s, transform 0.3s',
-        '&:hover': {
-          backgroundColor: '#3700b3',
-          transform: 'scale(1.05)',
-        },
-      }} 
-      href='/pricing'>
-        upgrade
-      </Button>
-      </Box>
-    }
-      </Box>
-
-      {flashcards.length > 0 && (
-        <Box ref={flashcardsRef} sx={{ mt: 10, p: 2 }}>
-          <Typography variant="h5" component="h2" gutterBottom sx={{ textAlign: 'center', mb: 3, color: '#f0f0f0' }}>
-            Generated Flashcards
+          <Typography variant="h6" sx={{ color: '#b0b0b0', textAlign: 'center', my: 2 }}>
+            {upgradeMessage}
           </Typography>
-          <Grid container spacing={3}>
-            {flashcards.map((flashcard, index) => (
-              <Grid item xs={12} sm={6} md={4} key={index}>
-                <Card sx={{
-                  backgroundColor: '#1f1f1f', color: '#bb86fc', borderRadius: '15px',
-                  boxShadow: '0 4px 20px rgba(0, 0, 0, 0.3)', transition: 'transform 0.3s',
-                  '&:hover': {
-                    transform: 'scale(1.05)',
-                  }
-                }}>
-                  <CardActionArea onClick={() => { handleCardClick(index) }}>
-                    <CardContent>
-                      <Box sx={{
-                        perspective: '1000px',
-                        '& > div': {
-                          transition: 'transform 0.6s',
-                          transformStyle: 'preserve-3d',
-                          position: 'relative',
-                          width: '100%',
-                          height: '250px',
-                          transform: flipped[index] ? 'rotateY(180deg)' : 'rotateY(0deg)',
-                        },
-                        '& > div>div': {
-                          position: 'absolute',
-                          width: '100%',
-                          height: '100%',
-                          backfaceVisibility: 'hidden',
-                          display: 'flex',
-                          justifyContent: 'center',
-                          alignItems: 'center',
-                          p: 2,
-                        },
-                        '& > div>div:nth-of-type(2)': {
-                          transform: 'rotateY(180deg)',
-                          backgroundColor: '#3700b3',
-                        },
-                      }}>
-                        <div>
-                          <div>
-                            <Typography sx={{
-                              fontSize: "20px",
-                              textAlign: "center",
-                              wordBreak: "break-word",
-                              overflowWrap: "break-word",
-                              p: "20px",
-                              color: '#f0f0f0'
-                            }}>
-
-                              {flashcard.front}
-                            </Typography>
-                          </div>
-                          <div>
-                            <Typography sx={{
-                              fontSize: "20px",
-                              textAlign: "center",
-                              wordBreak: "break-word",
-                              overflowWrap: "break-word",
-                              p: "20px",
-                              color: 'white'
-                            }}>{flashcard.back}</Typography>
-                          </div>
-                        </div>
-                      </Box>
-                    </CardContent>
-                  </CardActionArea>
-                </Card>
-              </Grid>
-            ))}
-          </Grid>
-
-          <Box sx={{ mt: 4, display: 'flex', justifyContent: 'center' }}>
-            <Button variant="contained" color="primary" sx={{
-              backgroundColor: '#bb86fc',
-              color: 'white',
-              px: 3,
-              py: 1,
-              borderRadius: '20px',
-              boxShadow: '0 4px 10px rgba(0, 0, 0, 0.3)',
-              transition: 'background-color 0.3s, transform 0.3s',
-              '&:hover': {
-                backgroundColor: '#3700b3',
-                transform: 'scale(1.05)',
-              },
-            }} onClick={handleOpenSaveDialog}>
-              Save Flashcards
-            </Button>
-          </Box>
+          <Button sx={{
+            backgroundColor: '#bb86fc',
+            color: 'white',
+            px: 3,
+            py: 1,
+            borderRadius: '20px',
+            boxShadow: '0 4px 10px rgba(0, 0, 0, 0.3)',
+            transition: 'background-color 0.3s, transform 0.3s',
+            '&:hover': {
+              backgroundColor: '#3700b3',
+              transform: 'scale(1.05)',
+            },
+          }}
+            href='/pricing'>
+            upgrade
+          </Button>
         </Box>
-      )}
+        }
+      </Box>
+
+      {
+        flashcards.length > 0 && (
+          <Box ref={flashcardsRef} sx={{ mt: 10, p: 2 }}>
+            <Typography variant="h5" component="h2" gutterBottom sx={{ textAlign: 'center', mb: 3, color: '#f0f0f0' }}>
+              Generated Flashcards
+            </Typography>
+            <Grid container spacing={3}>
+              {flashcards.map((flashcard, index) => (
+                <Grid item xs={12} sm={6} md={4} key={index}>
+                  <Card sx={{
+                    backgroundColor: '#1f1f1f', color: '#bb86fc', borderRadius: '15px',
+                    boxShadow: '0 4px 20px rgba(0, 0, 0, 0.3)', transition: 'transform 0.3s',
+                    '&:hover': {
+                      transform: 'scale(1.05)',
+                    }
+                  }}>
+                    <CardActionArea onClick={() => { handleCardClick(index) }}>
+                      <CardContent>
+                        <Box sx={{
+                          perspective: '1000px',
+                          '& > div': {
+                            transition: 'transform 0.6s',
+                            transformStyle: 'preserve-3d',
+                            position: 'relative',
+                            width: '100%',
+                            height: '250px',
+                            transform: flipped[index] ? 'rotateY(180deg)' : 'rotateY(0deg)',
+                          },
+                          '& > div>div': {
+                            position: 'absolute',
+                            width: '100%',
+                            height: '100%',
+                            backfaceVisibility: 'hidden',
+                            display: 'flex',
+                            justifyContent: 'center',
+                            alignItems: 'center',
+                            p: 2,
+                          },
+                          '& > div>div:nth-of-type(2)': {
+                            transform: 'rotateY(180deg)',
+                            backgroundColor: '#3700b3',
+                          },
+                        }}>
+                          <div>
+                            <div>
+                              <Typography sx={{
+                                fontSize: "20px",
+                                textAlign: "center",
+                                wordBreak: "break-word",
+                                overflowWrap: "break-word",
+                                p: "20px",
+                                color: '#f0f0f0'
+                              }}>
+
+                                {flashcard.front}
+                              </Typography>
+                            </div>
+                            <div>
+                              <Typography sx={{
+                                fontSize: "20px",
+                                textAlign: "center",
+                                wordBreak: "break-word",
+                                overflowWrap: "break-word",
+                                p: "20px",
+                                color: 'white'
+                              }}>{flashcard.back}</Typography>
+                            </div>
+                          </div>
+                        </Box>
+                      </CardContent>
+                    </CardActionArea>
+                  </Card>
+                </Grid>
+              ))}
+            </Grid>
+
+            <Box sx={{ mt: 4, display: 'flex', justifyContent: 'center' }}>
+              <Button variant="contained" color="primary" sx={{
+                backgroundColor: '#bb86fc',
+                color: 'white',
+                px: 3,
+                py: 1,
+                borderRadius: '20px',
+                boxShadow: '0 4px 10px rgba(0, 0, 0, 0.3)',
+                transition: 'background-color 0.3s, transform 0.3s',
+                '&:hover': {
+                  backgroundColor: '#3700b3',
+                  transform: 'scale(1.05)',
+                },
+              }} onClick={handleOpenSaveDialog}>
+                Save Flashcards
+              </Button>
+            </Box>
+          </Box>
+        )
+      }
 
       <Fab color="primary" aria-label="add" onClick={handleOpenCreateDialog} disabled={addDisabled} sx={{
         position: 'fixed',
@@ -348,7 +351,8 @@ export default function Generate() {
         <DialogTitle sx={{ color: '#bb86fc' }}>Generate Flashcards</DialogTitle>
         <DialogContent>
           <DialogContentText sx={{ color: '#b0b0b0' }}>
-            Enter your flashcard topic. Be as detailed as you'd like.
+            Enter a flashcard topic for the AI to generate.<br />
+            Be as detailed as you'd like.
           </DialogContentText>
           <TextField
             autoFocus

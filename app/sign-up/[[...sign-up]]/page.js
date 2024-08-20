@@ -31,7 +31,7 @@ export default function SignUpPage() {
           Sign Up
         </Typography>
         <Box sx={{ width: '100%', maxWidth: '400px', mt: 1 }}>
-          <SignUp />
+          <SignUp path="/sign-up" />
         </Box>
       </Box>
     </Container>
