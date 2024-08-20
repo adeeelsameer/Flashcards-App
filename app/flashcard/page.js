@@ -15,6 +15,7 @@ import {
   Box,
 } from '@mui/material';
 import { collection, getDocs, doc, getDoc } from 'firebase/firestore';
+import { SignedIn, SignedOut, RedirectToSignIn } from '@clerk/nextjs';
 
 export default function Flashcard() {
   const { user } = useUser();
@@ -69,122 +70,129 @@ export default function Flashcard() {
   };
 
   return (
-    <Box sx={{ backgroundImage: 'linear-gradient(to right, #121212, #2c2c2c)', color: 'white', minHeight: '100vh', display: 'flex', flexDirection: 'column' }}>
-      <ResponsiveAppBar />
+    <>
+      <SignedIn>
+        <Box sx={{ backgroundImage: 'linear-gradient(to right, #121212, #2c2c2c)', color: 'white', minHeight: '100vh', display: 'flex', flexDirection: 'column' }}>
+          <ResponsiveAppBar />
 
-      <Container maxWidth="md" sx={{ flexGrow: 1, pt: '80px' }}>
-        {selectedSet ? (
-          <Box sx={{ mt: 4 }}>
-            <Typography variant="h4" gutterBottom sx={{ textAlign: 'center', color: '#f0f0f0' }}>
-              {selectedSet.name}
-            </Typography>
-            <Grid container spacing={3} mb='100px'>
-              {flashcards.length > 0 ? (
-                flashcards.map((flashcard, index) => (
-                  <Grid item xs={12} sm={6} md={4} key={index}>
+          <Container maxWidth="md" sx={{ flexGrow: 1, pt: '80px' }}>
+            {selectedSet ? (
+              <Box sx={{ mt: 4 }}>
+                <Typography variant="h4" gutterBottom sx={{ textAlign: 'center', color: '#f0f0f0' }}>
+                  {selectedSet.name}
+                </Typography>
+                <Grid container spacing={3} mb='100px'>
+                  {flashcards.length > 0 ? (
+                    flashcards.map((flashcard, index) => (
+                      <Grid item xs={12} sm={6} md={4} key={index}>
+                        <Card sx={{
+                          backgroundColor: '#1f1f1f', color: '#bb86fc', borderRadius: '15px',
+                          boxShadow: '0 4px 20px rgba(0, 0, 0, 0.3)', transition: 'transform 0.3s',
+                          '&:hover': {
+                            transform: 'scale(1.05)',
+                          },
+
+                        }}>
+                          <CardActionArea onClick={() => handleCardClick(index)}>
+                            <CardContent>
+                              <Box sx={{
+                                perspective: '1000px',
+                                '& > div': {
+                                  transition: 'transform 0.6s',
+                                  transformStyle: 'preserve-3d',
+                                  position: 'relative',
+                                  width: '100%',
+                                  height: '250px',
+                                  transform: flipped[index] ? 'rotateY(180deg)' : 'rotateY(0deg)',
+                                },
+                                '& > div>div': {
+                                  position: 'absolute',
+                                  width: '100%',
+                                  height: '100%',
+                                  backfaceVisibility: 'hidden',
+                                  display: 'flex',
+                                  justifyContent: 'center',
+                                  alignItems: 'center',
+                                  p: 2,
+                                },
+                                '& > div>div:nth-of-type(2)': {
+                                  transform: 'rotateY(180deg)',
+                                  backgroundColor: '#3700b3',
+                                },
+                              }}>
+                                <div>
+                                  <div>
+                                    <Typography sx={{
+                                      fontSize: "20px",
+                                      textAlign: "center",
+                                      wordBreak: "break-word",
+                                      overflowWrap: "break-word",
+                                      p: "20px",
+                                      color: '#f0f0f0'
+                                    }}>
+                                      {flashcard.front}
+                                    </Typography>
+                                  </div>
+                                  <div>
+                                    <Typography sx={{
+                                      fontSize: "20px",
+                                      textAlign: "center",
+                                      wordBreak: "break-word",
+                                      overflowWrap: "break-word",
+                                      p: "20px",
+                                      color: 'white'
+                                    }}>{flashcard.back}</Typography>
+                                  </div>
+                                </div>
+                              </Box>
+                            </CardContent>
+                          </CardActionArea>
+                        </Card>
+                      </Grid>
+                    ))
+                  ) : (
+                    <Typography variant="h6" color="textSecondary" sx={{ mt: 4, textAlign: 'center' }}>
+                      No flashcards found.
+                    </Typography>
+                  )}
+                </Grid>
+              </Box>
+            ) : (
+              <Grid container spacing={3} sx={{ mt: 4 }}>
+                {flashcards.map((set) => (
+                  <Grid item xs={12} sm={6} md={4} key={set.id}>
                     <Card sx={{
                       backgroundColor: '#1f1f1f', color: '#bb86fc', borderRadius: '15px',
                       boxShadow: '0 4px 20px rgba(0, 0, 0, 0.3)', transition: 'transform 0.3s',
                       '&:hover': {
                         transform: 'scale(1.05)',
-                      },
-
+                      }
                     }}>
-                      <CardActionArea onClick={() => handleCardClick(index)}>
+                      <CardActionArea onClick={() => window.location.href = `?id=${set.id}`}>
                         <CardContent>
-                          <Box sx={{
-                            perspective: '1000px',
-                            '& > div': {
-                              transition: 'transform 0.6s',
-                              transformStyle: 'preserve-3d',
-                              position: 'relative',
-                              width: '100%',
-                              height: '250px',
-                              transform: flipped[index] ? 'rotateY(180deg)' : 'rotateY(0deg)',
-                            },
-                            '& > div>div': {
-                              position: 'absolute',
-                              width: '100%',
-                              height: '100%',
-                              backfaceVisibility: 'hidden',
-                              display: 'flex',
-                              justifyContent: 'center',
-                              alignItems: 'center',
-                              p: 2,
-                            },
-                            '& > div>div:nth-of-type(2)': {
-                              transform: 'rotateY(180deg)',
-                              backgroundColor: '#3700b3',
-                            },
+                          <Typography sx={{
+                            fontSize: "20px",
+                            textAlign: "center",
+                            wordBreak: "break-word",
+                            overflowWrap: "break-word",
+                            p: "20px",
+                            color: '#f0f0f0'
                           }}>
-                            <div>
-                              <div>
-                                <Typography sx={{
-                                  fontSize: "20px",
-                                  textAlign: "center",
-                                  wordBreak: "break-word",
-                                  overflowWrap: "break-word",
-                                  p: "20px",
-                                  color: '#f0f0f0'
-                                }}>
-                                  {flashcard.front}
-                                </Typography>
-                              </div>
-                              <div>
-                                <Typography sx={{
-                                  fontSize: "20px",
-                                  textAlign: "center",
-                                  wordBreak: "break-word",
-                                  overflowWrap: "break-word",
-                                  p: "20px",
-                                  color: 'white'
-                                }}>{flashcard.back}</Typography>
-                              </div>
-                            </div>
-                          </Box>
+                            {set.name}
+                          </Typography>
                         </CardContent>
                       </CardActionArea>
                     </Card>
                   </Grid>
-                ))
-              ) : (
-                <Typography variant="h6" color="textSecondary" sx={{ mt: 4, textAlign: 'center' }}>
-                  No flashcards found.
-                </Typography>
-              )}
-            </Grid>
-          </Box>
-        ) : (
-          <Grid container spacing={3} sx={{ mt: 4 }}>
-            {flashcards.map((set) => (
-              <Grid item xs={12} sm={6} md={4} key={set.id}>
-                <Card sx={{
-                  backgroundColor: '#1f1f1f', color: '#bb86fc', borderRadius: '15px',
-                  boxShadow: '0 4px 20px rgba(0, 0, 0, 0.3)', transition: 'transform 0.3s',
-                  '&:hover': {
-                    transform: 'scale(1.05)',
-                  }
-                }}>
-                  <CardActionArea onClick={() => window.location.href = `?id=${set.id}`}>
-                    <CardContent>
-                      <Typography sx={{
-                        fontSize: "20px",
-                        textAlign: "center",
-                        wordBreak: "break-word",
-                        overflowWrap: "break-word",
-                        p: "20px",
-                        color: '#f0f0f0'
-                      }}>
-                        {set.name}
-                      </Typography>
-                    </CardContent>
-                  </CardActionArea>
-                </Card>
+                ))}
               </Grid>
-            ))}
-          </Grid>
-        )}
-      </Container>
-    </Box>
+            )}
+          </Container>
+        </Box>
+      </SignedIn>
+      <SignedOut>
+        <RedirectToSignIn />
+      </SignedOut>
+    </>
   );
 }
