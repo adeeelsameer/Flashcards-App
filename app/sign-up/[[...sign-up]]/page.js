@@ -10,7 +10,6 @@ export default function SignUpPage() {
     disableGutters
     sx={{
       height: '100vh',
-      overflow: 'hidden',
       display: 'flex',
       flexDirection: 'column',
     }}
@@ -24,7 +23,7 @@ export default function SignUpPage() {
         justifyContent: 'center',
         minHeight: 'calc(100vh - 64px)',
         px: 2,
-        mt: { xs: '64px', md: '80px' },
+        mt: { xs: '160px', md: '110px' },
       }}
     >
       <Typography variant="h4" component="h1" gutterBottom>
