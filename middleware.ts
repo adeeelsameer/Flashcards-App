@@ -1,21 +1,28 @@
-import { NextRequest, NextResponse } from 'next/server'
-import { clerkMiddleware, createRouteMatcher } from '@clerk/nextjs/server'
+import { NextRequest, NextResponse } from 'next/server';
+import { clerkMiddleware, createRouteMatcher } from '@clerk/nextjs/server';
 
 // Define your public routes
-const isPublicRoute = createRouteMatcher(['/sign-in', '/sign-up', '/', '/faq', '/aboutus'])
+const isPublicRoute = createRouteMatcher(['/sign-in', '/sign-up', '/', '/faq', '/aboutus']);
 
-const isProtectedRoute = createRouteMatcher(["/"]);
-
-export default clerkMiddleware((auth, request) => {
-  { if (isProtectedRoute(request)) { auth().protect(); } };
+export default clerkMiddleware((auth, request: NextRequest) => {
+  // Check if the current route is a public route
   if (!isPublicRoute(request)) {
     const authState = auth();
     if (!authState.userId) {
-      // Redirect to the sign-in page
+      // Redirect to the sign-in page if the user is not authenticated
       return NextResponse.redirect(new URL('/sign-in', request.url));
     }
   }
-  return NextResponse.next(); // Continue to the next middleware or route
+  
+  // Continue to the next middleware or route
+  return NextResponse.next();
 });
 
-export const config = { matcher: ["/((?!.\..|_next).)", "/", "/(api|trpc)(.)"], };
+export const config = {
+  matcher: [
+    // Match all routes except for public routes
+    '/((?!sign-in|sign-up|faq|aboutus|_next|.*\\..*).*)',
+    '/', // Ensure the root (/) is matched properly
+    '/(api|trpc)(.*)' // Match API and TRPC routes
+  ],
+};
