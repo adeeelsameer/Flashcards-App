@@ -146,6 +146,8 @@ export default function Generate() {
       return;
     }
 
+    setLoading(true)
+
     try {
       const userDocRef = doc(db, 'users', user.id);
       const setDocRef = doc(userDocRef, 'flashcardSets', setName);
@@ -158,14 +160,15 @@ export default function Generate() {
 
       await setDoc(setDocRef, { flashcards });
 
-      alert('Flashcards saved successfully!');
       handleCloseSaveDialog();
       setSetName('');
       window.location.href = '/flashcards';
+
     } catch (error) {
       console.error('Error saving flashcards:', error);
       alert('An error occurred while saving flashcards. Please try again.');
     }
+    setLoading(false)
   };
 
   return (
@@ -186,7 +189,7 @@ export default function Generate() {
 
         <Typography variant="h6" sx={{ color: '#b0b0b0', mb: 2 }}>
           Use the + button on the bottom right to create a new flashcard. <br />
-          The AI will generate the flahscards for you!
+          The AI will generate the flashcards for you!
         </Typography>
 
         {flashcardSets.length > 0 && (<Box sx={{ display: 'flex', gap: 2, mt: 2 }}>
@@ -352,7 +355,7 @@ export default function Generate() {
         <DialogTitle sx={{ color: '#bb86fc' }}>Generate Flashcards</DialogTitle>
         <DialogContent>
           <DialogContentText sx={{ color: '#b0b0b0' }}>
-            Enter a flashcard topic for the AI to generate.<br />
+            Enter a flashcard topic and the AI will generate the flashcards for you.<br />
             Be as detailed as you'd like.
           </DialogContentText>
           <TextField
@@ -366,6 +369,12 @@ export default function Generate() {
             variant="outlined"
             value={text}
             onChange={(e) => setText(e.target.value)}
+            onKeyDown={(e) => {
+              if (e.key === 'Enter' && !e.shiftKey) {
+                e.preventDefault(); // Prevents moving to the next line
+                handleSubmit();
+              }
+            }}
             sx={{ mt: 2, bgcolor: '#333', color: '#f0f0f0', borderRadius: '4px' }}
             InputLabelProps={{ style: { color: '#b0b0b0' } }}
             InputProps={{ style: { color: '#f0f0f0' } }}
@@ -377,6 +386,7 @@ export default function Generate() {
             {loading ? <CircularProgress size={24} sx={{ color: '#bb86fc' }} /> : 'Generate'}
           </Button>
         </DialogActions>
+
       </Dialog>
 
       <Dialog open={saveDialogOpen} onClose={handleCloseSaveDialog} PaperProps={{ sx: { backgroundColor: '#1f1f1f', color: '#f0f0f0' } }}>
@@ -388,7 +398,6 @@ export default function Generate() {
           <TextField
             autoFocus
             margin="dense"
-            label="Set Name"
             type="text"
             fullWidth
             sx={{ bgcolor: '#333', borderRadius: '4px', color: '#f0f0f0' }}
@@ -401,7 +410,7 @@ export default function Generate() {
         <DialogActions>
           <Button onClick={handleCloseSaveDialog} sx={{ color: '#b0b0b0' }}>Cancel</Button>
           <Button onClick={saveFlashcards} sx={{ color: '#bb86fc' }}>
-            Save
+            {loading ? <CircularProgress size={24} sx={{ color: '#bb86fc' }} /> : 'Save'}
           </Button>
         </DialogActions>
       </Dialog>
