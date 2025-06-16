@@ -1,98 +1,78 @@
-# Flashcards-App
+# ⚡ Flashcards-App
 
-Flashcards-App is a SaaS (Software as a Service) application designed to generate AI-powered flashcards. The app leverages cutting-edge technologies such as Next.js, Clerk, Firebase, OpenAI, and Stripe to provide a seamless user experience. This was created as a group project at Headstarter AI.
+**Flashcards-App** is a powerful AI-powered SaaS application that generates personalized flashcards using the latest advancements in machine learning. Built with **Next.js**, **Clerk**, **Firebase**, **OpenAI**, and **Stripe**, this app delivers a seamless and secure experience for learners and educators alike.
 
-# Join the Waitlist By Completing this form
-https://tally.so/r/w7oa2A
+Link to the website: https://flashcards-zeta-ten.vercel.app/
 
-## Features
+---
 
-- **AI Flashcard Generation:** Automatically create flashcards using OpenAI's language model.
-- **User Authentication:** Secure user authentication and management with Clerk.
-- **Database Management:** Store user data and flashcards securely with Firebase Firestore.
-- **Flexible Subscription Plans:** Offer Bronze, Silver, and Gold subscription tiers with Stripe integration for payments.
-- **Responsive Design:** Optimized for both desktop and mobile devices.
+## 🔑 Key Features
 
-## Getting Started
+- 🎯 **AI Flashcard Generation**  
+  Automatically generate high-quality flashcards using OpenAI's GPT model.
 
-### Prerequisites
+- 👥 **User Authentication with Clerk**  
+  Fast and secure authentication, account management, and session handling.
 
-- Node.js installed on your machine.
-- Firebase account and configuration details.
-- OpenAI API key for AI-powered flashcard generation.
-- Stripe account for payment processing.
+- 🔐 **Secure Data Storage**  
+  Store user-generated flashcards and data safely with Firebase Firestore.
 
-### Installation
+- 💳 **Flexible Subscription Tiers**  
+  Monetization through Stripe-powered Bronze, Silver, and Gold plans.
 
-1. Clone the repository:
+- 📱 **Responsive UI**  
+  Optimized layout for both desktop and mobile experiences.
 
-    ```bash
-    git clone https://github.com/Rabia-Ghafoor/Flashcards-App.git
+---
+
+## 🛠️ Getting Started
+
+### ✅ Prerequisites
+
+Before you begin, ensure you have the following:
+
+- [Node.js](https://nodejs.org/) installed
+- A [Firebase](https://firebase.google.com/) project with Firestore enabled
+- An [OpenAI](https://platform.openai.com/signup) API key
+- A [Stripe](https://dashboard.stripe.com/register) account
+- A [Clerk](https://clerk.dev/) account for authentication
+
+---
+
+### 📦 Running the app
+
+1. **Clone the Repository**
+   ```bash
+   git clone https://github.com/Rabia-Ghafoor/Flashcards-App.git
+   cd Flashcards-App
+
+   npm install
+   
+    # Firebase
+    NEXT_PUBLIC_FIREBASE_API_KEY=your-firebase-api-key
+
+    # OpenAI
+   ```
+
+2. **Create Environment Variables**
+    ```env
+    NEXT_PUBLIC_OPENAI_API_KEY=your-openai-api-key
+    
+    # Clerk
+    NEXT_PUBLIC_CLERK_FRONTEND_API=your-clerk-frontend-api
+    CLERK_API_KEY=your-clerk-api-key
+    
+    # Stripe
+    STRIPE_SECRET_KEY=your-stripe-secret-key
+    NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY=your-stripe-publishable-key
     ```
+3. **Start the development server**
+   ```bash
+   npm run dev
+   ```
 
-2. Navigate to the project directory:
+    Visit http://localhost:3000 in your browser to view the app.
 
-    ```bash
-    cd Flashcards-App
-    ```
+### 🤝 Contributing
+We welcome contributions! If you would like to report a bug or request a feature, please open an issue or submit a pull request.
 
-3. Install dependencies:
-
-    ```bash
-    npm install
-    ```
-
-### Environment Setup
-
-Create a `.env.local` file in the root directory and add your environment variables:
-
-```plaintext
-NEXT_PUBLIC_FIREBASE_API_KEY=your-firebase-api-key
-NEXT_PUBLIC_FIREBASE_AUTH_DOMAIN=your-firebase-auth-domain
-NEXT_PUBLIC_FIREBASE_PROJECT_ID=your-firebase-project-id
-NEXT_PUBLIC_FIREBASE_STORAGE_BUCKET=your-firebase-storage-bucket
-NEXT_PUBLIC_FIREBASE_MESSAGING_SENDER_ID=your-firebase-messaging-sender-id
-NEXT_PUBLIC_FIREBASE_APP_ID=your-firebase-app-id
-NEXT_PUBLIC_FIREBASE_MEASUREMENT_ID=your-firebase-measurement-id
-
-NEXT_PUBLIC_OPENAI_API_KEY=your-openai-api-key
-
-NEXT_PUBLIC_CLERK_FRONTEND_API=your-clerk-frontend-api
-CLERK_API_KEY=your-clerk-api-key
-
-STRIPE_SECRET_KEY=your-stripe-secret-key
-NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY=your-stripe-publishable-key
-
-
-First, run the development server:
-
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
-
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
-
-You can start editing the page by modifying `app/page.js`. The page auto-updates as you edit the file.
-
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
-
-## Learn More
-
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
