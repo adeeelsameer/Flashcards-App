@@ -2,7 +2,7 @@
 
 **Flashcards-App** is a powerful AI-powered SaaS application that generates personalized flashcards using AI. Built with **Next.js**, **Clerk**, **Firebase**, **OpenAI**, and **Stripe**, this app delivers a seamless and secure experience for learners and educators alike.
 
-Link to the website: https://flashcards-zeta-ten.vercel.app/
+Link to the website: https://flashcards-app-kappa.vercel.app/
 
 ---
 
